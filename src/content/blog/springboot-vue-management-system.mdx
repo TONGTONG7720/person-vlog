@@ -1,0 +1,60 @@
+---
+title: 'Spring Boot + Vue 企业管理系统开发完整记录'
+slug: 'springboot-vue-management-system'
+description: '从需求梳理、权限边界到前后端协作，记录一个企业管理系统如何在可维护性与交付节奏之间取得平衡。'
+category: 'java'
+tags: ['Java', 'Spring Boot', 'Vue', 'Architecture']
+publishedAt: '2026-07-25'
+updatedAt: '2026-07-25'
+readingTime: 8
+featured: true
+isPrimary: true
+draft: false
+author: '瞳瞳'
+---
+
+# Spring Boot + Vue 企业管理系统开发完整记录
+
+企业管理系统并不只是“把表单和列表做出来”。真正影响后续交付的，通常是权限、数据边界和接口约定是否在第一轮就被讲清楚。本文记录一套适合中小型业务系统的拆分方法，重点是让前端、后端和运营规则可以各自演进。
+
+> 本文讨论的是通用设计方法，不把尚未验证的项目设想包装成已经交付的客户成果。
+
+## 先定义业务对象和边界
+
+开始编码前，先用业务语言列出系统中长期存在的对象：用户、角色、门店、订单、库存、审批单。每个对象都要明确“谁可以创建、谁可以查看、谁可以修改”。如果这个问题只能靠前端按钮隐藏来回答，权限边界还没有建立。
+
+| 层次             | 主要职责                     | 不应该承担             |
+| ---------------- | ---------------------------- | ---------------------- |
+| Vue 页面         | 收集输入、呈现状态、引导操作 | 决定用户是否真正有权限 |
+| Spring Boot 服务 | 校验规则、协调事务、组织用例 | 直接依赖页面组件结构   |
+| 数据库           | 保存事实、约束关键关联       | 替业务流程做隐式猜测   |
+
+## 权限应放在服务端入口
+
+前端可以根据权限改善体验，但服务端仍然是最终判断点。一个简单的写操作可以先收敛为“请求对象 + 领域校验 + 权限校验 + 事务”的结构：
+
+```java
+@Transactional
+public void updateOrderStatus(UpdateOrderStatusCommand command, CurrentUser currentUser) {
+    permissionChecker.require(currentUser, "order:update");
+    Order order = orderRepository.requireById(command.orderId());
+    order.changeStatus(command.status());
+    orderRepository.save(order);
+}
+```
+
+这段代码的价值不在于框架注解，而在于让权限检查和状态变更在同一个可追踪的应用用例中发生。后续接入审计日志、消息通知或审批流时，也有明确的落点。
+
+## 让接口约定可被前后端共同维护
+
+接口字段不要只存在于某一端的临时类型中。至少要约定：分页参数、错误码格式、日期时区、空值含义，以及列表页需要的最小字段集合。Vue 页面应当把请求状态集中到组合式函数或数据层，而不是散落在多个按钮回调里。
+
+### 一个可维护的接口返回层次
+
+- Controller：处理 HTTP、鉴权上下文和输入格式。
+- Application Service：组织一个完整业务用例。
+- Repository：处理查询与持久化，不泄露数据库细节给页面。
+
+## 小结
+
+当模块边界、权限和接口约定先稳定下来，页面样式、报表和自动化流程才能更安全地继续迭代。下一步可以结合具体业务，补充数据模型、角色矩阵和异常流程。

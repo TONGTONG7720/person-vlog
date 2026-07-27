@@ -1,0 +1,93 @@
+{
+  "site": {
+    "name": "Tong",
+    "title": "Tong | Full Stack Developer Building AI Products",
+    "description": "A full stack developer focused on Java, Python, Vue and AI applications for dependable business software and product delivery."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "services": "Services",
+    "blog": "Journal",
+    "marketplace": "Marketplace",
+    "contact": "Contact",
+    "contactAction": "Work together",
+    "primary": "Primary navigation",
+    "mobile": "Mobile navigation",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu",
+    "menuTitle": "Site navigation",
+    "menuDescription": "Choose a page to continue browsing. Press Escape to close the menu.",
+    "contactPending": "Contact channels will be configured on the contact page."
+  },
+  "language": {
+    "label": "Language",
+    "zh": "Chinese",
+    "en": "English",
+    "switchToZh": "Switch to Chinese",
+    "switchToEn": "Switch to English"
+  },
+  "footer": {
+    "description": "Turning business ideas into clear, useful and sustainable digital products through dependable software engineering.",
+    "copyright": "All rights reserved.",
+    "explore": "Explore",
+    "privacy": "Privacy"
+  },
+  "newsletter": {
+    "title": "Get new technical articles",
+    "description": "This only records your interest. Email delivery will be added in a later operations phase.",
+    "emailLabel": "Email address",
+    "placeholder": "Your email",
+    "submit": "Register interest",
+    "loading": "Registering…",
+    "fallbackError": "Registration is temporarily unavailable. Please try again shortly."
+  },
+  "pwa": {
+    "addToHomeScreen": "Add to Home Screen",
+    "installing": "Opening install prompt…",
+    "iosInstructions": "In Safari, use the Share menu and choose Add to Home Screen."
+  },
+  "common": {
+    "backToTop": "Back to top"
+  },
+  "blogDirectory": {
+    "searchLabel": "Search articles",
+    "searchPlaceholder": "Search titles, tags or keywords",
+    "categories": "Article categories",
+    "tags": "Article tags",
+    "all": "All",
+    "allTags": "All tags",
+    "count": "{count} articles found",
+    "empty": "No articles match those filters. Clear a filter or try a more specific technical keyword."
+  },
+  "error": {
+    "title": "This page is temporarily unavailable",
+    "detailWithDigest": "The system recorded an error identifier. Please try again shortly.",
+    "detail": "Please try again shortly, or return home to keep browsing.",
+    "retry": "Try again",
+    "home": "Return home"
+  },
+  "notFound": {
+    "title": "404 · This page was not found",
+    "description": "This address may not be published yet, or the link may have changed.",
+    "home": "Return home"
+  },
+  "assistant": {
+    "title": "Tong Assistant",
+    "description": "Your on-site project guide",
+    "open": "Open Tong Assistant",
+    "close": "Close Tong Assistant",
+    "quickActions": "Quick questions",
+    "inputLabel": "Ask Tong Assistant",
+    "placeholder": "For example: I need an AI knowledge base…",
+    "send": "Send question",
+    "inputHint": "Press Enter to send. Shift + Enter adds a line.",
+    "thinking": "Preparing an answer",
+    "assistantResponse": "Tong Assistant response",
+    "userQuestion": "Your question",
+    "relatedPages": "Related pages",
+    "failure": "I cannot answer right now. You can still discuss your project on the contact page.",
+    "failureLink": "Open contact page"
+  }
+}

@@ -1,0 +1,177 @@
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mobile-menu-overlay-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mobile-menu-overlay-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes mobile-menu-content-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--space-6));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mobile-menu-content-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(var(--space-4));
+  }
+}
+
+@keyframes mobile-menu-link-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--space-3));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer components {
+  .site-header {
+    background-color: transparent;
+    border-color: transparent;
+    transform: translateY(0);
+    z-index: var(--z-header);
+    transition:
+      background-color var(--motion-standard) var(--ease-out-curve),
+      border-color var(--motion-standard) var(--ease-out-curve),
+      transform var(--motion-standard) var(--ease-out-curve);
+  }
+
+  .site-header[data-scrolled='true'] {
+    background-color: var(--color-canvas-subtle);
+    border-color: var(--color-border-subtle);
+  }
+
+  @supports (backdrop-filter: blur(1px)) {
+    .site-header[data-scrolled='true'] {
+      background-color: color-mix(in oklch, var(--color-canvas) 72%, transparent);
+      backdrop-filter: blur(18px);
+    }
+  }
+
+  .site-header[data-hidden='true'] {
+    transform: translateY(calc(-100% - var(--space-2)));
+  }
+
+  .site-header[data-menu-open='true'] {
+    background-color: var(--color-canvas-subtle);
+    border-color: var(--color-border-subtle);
+    z-index: var(--z-toast);
+  }
+
+  .mobile-menu-overlay[data-state='open'] {
+    animation: mobile-menu-overlay-in var(--motion-standard) var(--ease-out-curve) both;
+  }
+
+  .mobile-menu-overlay[data-state='closed'] {
+    animation: mobile-menu-overlay-out var(--motion-fast) var(--ease-in-out-curve) both;
+  }
+
+  .mobile-menu-content[data-state='open'] {
+    animation: mobile-menu-content-in var(--motion-menu) var(--ease-enter-curve) both;
+  }
+
+  .mobile-menu-content[data-state='closed'] {
+    animation: mobile-menu-content-out var(--motion-standard) var(--ease-in-out-curve) both;
+  }
+
+  .mobile-menu-content[data-state='open'] .mobile-menu-link {
+    animation: mobile-menu-link-in var(--motion-menu-item) var(--ease-enter-curve) both;
+  }
+
+  .mobile-menu-content[data-state='open'] li:nth-child(2) .mobile-menu-link {
+    animation-delay: 40ms;
+  }
+
+  .mobile-menu-content[data-state='open'] li:nth-child(3) .mobile-menu-link {
+    animation-delay: 80ms;
+  }
+
+  .mobile-menu-content[data-state='open'] li:nth-child(4) .mobile-menu-link {
+    animation-delay: 120ms;
+  }
+
+  .mobile-menu-content[data-state='open'] li:nth-child(5) .mobile-menu-link {
+    animation-delay: 160ms;
+  }
+
+  .mobile-menu-content[data-state='open'] li:nth-child(6) .mobile-menu-link {
+    animation-delay: 200ms;
+  }
+}
+
+@layer utilities {
+  .motion-fade-up {
+    animation: fade-up var(--motion-reveal) var(--ease-enter-curve) both;
+  }
+
+  .transition-interaction {
+    transition-duration: var(--motion-fast);
+    transition-property: background-color, border-color, color, opacity, transform;
+    transition-timing-function: var(--ease-out-curve);
+  }
+
+  @media (min-width: 64rem) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .magnetic-link {
+      translate: var(--magnetic-x, 0px) var(--magnetic-y, 0px);
+      transition: translate var(--motion-fast) var(--ease-out-curve);
+      will-change: translate;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header,
+  .mobile-menu-overlay,
+  .mobile-menu-content,
+  .mobile-menu-link {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .magnetic-link {
+    translate: none !important;
+    will-change: auto;
+  }
+}

@@ -1,0 +1,209 @@
+.aios-list-panel {
+  padding: var(--space-5);
+}
+
+.aios-status-list,
+.aios-approval-list,
+.aios-report-list,
+.aios-trace-list,
+.aios-run-list {
+  margin-block-start: var(--space-5);
+}
+
+.aios-status-list li,
+.aios-report-list li,
+.aios-trace-list li,
+.aios-run-list li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-block-size: var(--aios-row-min-height);
+  border-block-end: 1px solid var(--color-border-subtle);
+  padding-block-end: var(--space-3);
+}
+
+.aios-status-list li:last-child,
+.aios-report-list li:last-child,
+.aios-trace-list li:last-child,
+.aios-run-list li:last-child {
+  border-block-end: 0;
+  padding-block-end: 0;
+}
+
+.aios-status-list div,
+.aios-report-list div,
+.aios-trace-list div,
+.aios-run-list div,
+.aios-approval-list li > div {
+  min-inline-size: 0;
+  flex: 1;
+}
+
+.aios-status-list strong,
+.aios-report-list strong,
+.aios-trace-list strong,
+.aios-run-list strong,
+.aios-approval-list strong {
+  display: block;
+  color: var(--color-text-primary);
+  font-size: var(--text-body-sm-size);
+  font-weight: var(--font-weight-medium);
+  overflow-wrap: anywhere;
+}
+
+.aios-status-list small,
+.aios-report-list small,
+.aios-trace-list small,
+.aios-run-list small,
+.aios-approval-list small {
+  display: block;
+  margin-block-start: var(--space-1);
+  color: var(--color-text-tertiary);
+  font-size: var(--text-label-size);
+  overflow-wrap: anywhere;
+}
+
+.aios-status-dot {
+  inline-size: var(--space-2);
+  block-size: var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-text-disabled);
+}
+
+.aios-status-dot[data-active='true'] {
+  background: var(--color-success);
+}
+
+.aios-status-list em,
+.aios-report-list em,
+.aios-approval-list em,
+.aios-run-list > li > span {
+  color: var(--color-text-secondary);
+  font-family: var(--font-code);
+  font-size: var(--text-label-size);
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.aios-run-list > li > span[data-status='COMPLETED'],
+.aios-run-list > li > span[data-status='APPROVED'] {
+  color: var(--color-success);
+}
+
+.aios-run-list > li > span[data-status='FAILED'] {
+  color: var(--color-danger);
+}
+
+.aios-run-list > li > span[data-status='AWAITING_APPROVAL'] {
+  color: var(--color-warning);
+}
+
+.aios-approval-list li {
+  display: grid;
+  gap: var(--space-3);
+  border-block-end: 1px solid var(--color-border-subtle);
+  padding-block-end: var(--space-4);
+}
+
+.aios-approval-list li:last-child {
+  border-block-end: 0;
+  padding-block-end: 0;
+}
+
+.aios-approval-actions > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.aios-approval-actions .saas-primary-button,
+.aios-approval-actions .saas-secondary-button {
+  min-block-size: var(--button-md-height);
+}
+
+.aios-report-list svg,
+.aios-trace-list svg {
+  flex: 0 0 auto;
+  color: var(--color-accent-cyan);
+}
+
+.aios-trace-list time,
+.aios-observability-traces time {
+  color: var(--color-text-tertiary);
+  font-family: var(--font-code);
+  font-size: var(--text-label-size);
+}
+
+.aios-definition-list {
+  display: grid;
+  gap: var(--space-3);
+  margin: var(--space-5) 0 0;
+}
+
+.aios-definition-list > div:last-child {
+  border-block-end: 0;
+  padding-block-end: 0;
+}
+
+.aios-definition-list dt {
+  color: var(--color-text-secondary);
+  font-size: var(--text-body-sm-size);
+}
+
+.aios-observability-traces {
+  margin-block-start: var(--space-5);
+  max-block-size: var(--aios-trace-max-block-size);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.aios-observability-traces li {
+  display: grid;
+  grid-template-columns: minmax(var(--space-24), auto) minmax(0, 1fr);
+  gap: var(--space-2) var(--space-4);
+  border-block-end: 1px solid var(--color-border-subtle);
+  padding-block: var(--space-3);
+}
+
+.aios-observability-traces li:last-child {
+  border-block-end: 0;
+}
+
+.aios-observability-traces strong {
+  color: var(--color-text-primary);
+  font-size: var(--text-body-sm-size);
+  font-weight: var(--font-weight-medium);
+}
+
+.aios-observability-traces span {
+  grid-column: 2;
+  color: var(--color-text-tertiary);
+  font-size: var(--text-label-size);
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 64rem) {
+  .aios-primary-grid,
+  .aios-detail-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .aios-workflow-nodes {
+    grid-template-columns: repeat(auto-fit, minmax(var(--space-40), 1fr));
+  }
+
+  .aios-workflow-nodes li {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .aios-workflow-nodes li svg {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aios-task-form select,
+  .aios-task-form textarea {
+    transition: none;
+  }
+}

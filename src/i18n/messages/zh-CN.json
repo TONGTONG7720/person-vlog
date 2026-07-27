@@ -1,0 +1,93 @@
+{
+  "site": {
+    "name": "瞳瞳",
+    "title": "瞳瞳 | Java、Python、Vue 与 AI 全栈开发",
+    "description": "专注于 Java、Python、Vue 与 AI 应用开发，提供企业系统开发、AI 产品开发、自动化工具和技术方案设计。"
+  },
+  "nav": {
+    "home": "首页",
+    "about": "关于",
+    "projects": "项目",
+    "services": "服务",
+    "blog": "博客",
+    "marketplace": "市场",
+    "contact": "联系",
+    "contactAction": "联系合作",
+    "primary": "主要导航",
+    "mobile": "移动端主导航",
+    "openMenu": "打开导航菜单",
+    "closeMenu": "关闭导航菜单",
+    "menuTitle": "网站主导航",
+    "menuDescription": "选择一个页面继续浏览，按 Escape 可关闭菜单。",
+    "contactPending": "联系渠道将在正式联系页配置。"
+  },
+  "language": {
+    "label": "语言",
+    "zh": "中文",
+    "en": "English",
+    "switchToZh": "切换到中文",
+    "switchToEn": "Switch to English"
+  },
+  "footer": {
+    "description": "用可靠的软件工程，把业务想法梳理成清晰、可用、可持续的数字产品。",
+    "copyright": "保留所有权利。",
+    "explore": "探索",
+    "privacy": "隐私说明"
+  },
+  "newsletter": {
+    "title": "接收新的技术文章",
+    "description": "只登记订阅意向，邮件发送能力将在后续运营阶段接入。",
+    "emailLabel": "邮箱地址",
+    "placeholder": "你的邮箱",
+    "submit": "登记订阅",
+    "loading": "登记中…",
+    "fallbackError": "暂时无法登记，请稍后再试。"
+  },
+  "pwa": {
+    "addToHomeScreen": "添加到主屏幕",
+    "installing": "正在打开安装提示…",
+    "iosInstructions": "请在 Safari 的分享菜单中选择“添加到主屏幕”。"
+  },
+  "common": {
+    "backToTop": "返回顶部"
+  },
+  "blogDirectory": {
+    "searchLabel": "搜索文章",
+    "searchPlaceholder": "搜索标题、标签或关键词",
+    "categories": "文章分类",
+    "tags": "文章标签",
+    "all": "全部",
+    "allTags": "所有标签",
+    "count": "找到 {count} 篇内容",
+    "empty": "没有匹配的文章。可以清除筛选条件，或换一个更具体的技术关键词。"
+  },
+  "error": {
+    "title": "页面暂时无法显示",
+    "detailWithDigest": "系统已记录本次错误标识，请稍后重试。",
+    "detail": "请稍后重试，或返回首页继续浏览。",
+    "retry": "重试",
+    "home": "返回首页"
+  },
+  "notFound": {
+    "title": "404 · 没有找到这个页面",
+    "description": "这个地址可能尚未发布，或链接已经发生变化。",
+    "home": "返回首页"
+  },
+  "assistant": {
+    "title": "Tong Assistant",
+    "description": "站内项目顾问",
+    "open": "打开 Tong Assistant",
+    "close": "关闭 Tong Assistant",
+    "quickActions": "快捷问题",
+    "inputLabel": "向 Tong Assistant 提问",
+    "placeholder": "例如：我想做一个 AI 知识库…",
+    "send": "发送问题",
+    "inputHint": "Enter 发送，Shift + Enter 换行",
+    "thinking": "正在回答",
+    "assistantResponse": "Tong Assistant 的回答",
+    "userQuestion": "你的问题",
+    "relatedPages": "相关页面",
+    "failure": "暂时无法回答。你也可以直接通过联系页面沟通项目需求。",
+    "failureLink": "前往联系页"
+  }
+}

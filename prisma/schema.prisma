@@ -1,0 +1,2072 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ProjectStatus {
+  COMPLETED
+  IN_PROGRESS
+  CONCEPT
+}
+
+enum MessageStatus {
+  UNREAD
+  PROCESSING
+  COMPLETED
+  ARCHIVED
+}
+
+enum KnowledgeSyncStatus {
+  CURRENT
+  PENDING
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  DISCOVERY
+  PROPOSAL
+  NEGOTIATION
+  WON
+  LOST
+}
+
+enum LeadPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum LeadActivityType {
+  NOTE
+  EMAIL
+  CALL
+  MEETING
+  STATUS_CHANGE
+}
+
+enum CrmTaskStatus {
+  TODO
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum CrmProjectStatus {
+  PLANNING
+  DESIGN
+  DEVELOPMENT
+  TESTING
+  DEPLOY
+  COMPLETED
+}
+
+enum ProposalStatus {
+  DRAFT
+  SENT
+  ACCEPTED
+  REJECTED
+}
+
+enum AutomationRuleTrigger {
+  LEAD_CREATED
+}
+
+enum AutomationRuleAction {
+  CREATE_FOLLOW_UP_TASK
+  SEND_CONTACT_CONFIRMATION
+  SEND_ADMIN_NOTIFICATION
+}
+
+enum AiAgentType {
+  LEAD
+  PROPOSAL
+  CONTENT
+  KNOWLEDGE
+  PROJECT
+  MEETING
+}
+
+enum AiUsageStatus {
+  COMPLETED
+  FAILED
+  SKIPPED
+}
+
+enum AiContentDraftStatus {
+  DRAFT
+  REVIEWED
+  ARCHIVED
+}
+
+enum AiProjectPlanStatus {
+  DRAFT
+  APPROVED
+  ARCHIVED
+}
+
+enum NotificationChannelType {
+  EMAIL
+  WECHAT
+  TELEGRAM
+}
+
+enum SaasRoleKey {
+  OWNER
+  ADMIN
+  ENTERPRISE_OWNER
+  SECURITY_ADMIN
+  DEPARTMENT_ADMIN
+  MEMBER
+  VIEWER
+}
+
+enum MembershipStatus {
+  ACTIVE
+  INVITED
+  SUSPENDED
+}
+
+enum EnterpriseStatus {
+  ACTIVE
+  SUSPENDED
+  ARCHIVED
+}
+
+enum EnterpriseSsoProvider {
+  SAML
+  OIDC
+  OAUTH2
+}
+
+enum AiDocumentStatus {
+  UPLOADING
+  PROCESSING
+  SECURITY_REVIEW
+  READY
+  FAILED
+}
+
+enum AiDocumentSourceType {
+  TEXT
+  MARKDOWN
+  PDF
+  DOCX
+}
+
+enum AiDocumentJobStatus {
+  QUEUED
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum AiUsageChannel {
+  DASHBOARD
+  API
+  APP
+}
+
+enum AiOperatingAgentRole {
+  PLANNER
+  RESEARCH
+  DATA
+  WRITER
+  ACTION
+}
+
+enum AiAgentMemoryType {
+  SHORT_TERM
+  LONG_TERM
+}
+
+enum AiWorkflowRunStatus {
+  QUEUED
+  RUNNING
+  AWAITING_APPROVAL
+  APPROVED
+  COMPLETED
+  FAILED
+}
+
+enum AiEmployeeStatus {
+  ACTIVE
+  PAUSED
+  ARCHIVED
+}
+
+enum AiToolRiskLevel {
+  READ
+  WRITE
+  HIGH
+}
+
+enum AiApprovalStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  EXECUTED
+  EXPIRED
+}
+
+enum AiTraceEventType {
+  TASK_QUEUED
+  AGENT_STARTED
+  AGENT_COMPLETED
+  TOOL_CALLED
+  APPROVAL_REQUIRED
+  APPROVAL_RESOLVED
+  TASK_COMPLETED
+  TASK_FAILED
+}
+
+enum AiAppType {
+  KNOWLEDGE
+  CUSTOMER
+  SALES
+  DATA
+  WORKFLOW
+}
+
+enum AiAppStatus {
+  DRAFT
+  TESTING
+  PUBLISHED
+  ARCHIVED
+}
+
+enum AiAppEnvironment {
+  DEVELOPMENT
+  PRODUCTION
+}
+
+enum AiAppAccessRuleKind {
+  ALL_MEMBERS
+  ROLE
+  DEPARTMENT
+  MEMBERSHIP
+}
+
+enum WorkspaceProjectStatus {
+  PLANNING
+  DESIGN
+  DEVELOPMENT
+  TESTING
+  DEPLOY
+  COMPLETED
+}
+
+enum ProjectTaskStatus {
+  TODO
+  DOING
+  REVIEW
+  DONE
+}
+
+enum ProjectTaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum ProjectActivityType {
+  PROJECT_CREATED
+  TASK_CREATED
+  TASK_UPDATED
+  DOCUMENT_CREATED
+  FILE_UPLOADED
+}
+
+enum ProjectDocumentKind {
+  FILE
+  MARKDOWN
+}
+
+enum ProjectFileStorageProvider {
+  VERCEL_BLOB
+  S3
+  CLOUDFLARE_R2
+}
+
+enum SubscriptionStatus {
+  TRIALING
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+  EXPIRED
+}
+
+enum InvoiceStatus {
+  DRAFT
+  OPEN
+  PAID
+  VOID
+  UNCOLLECTIBLE
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+enum BillingCycle {
+  MONTHLY
+  YEARLY
+}
+
+enum OrganizationLifecycleStage {
+  LEAD
+  TRIAL
+  CUSTOMER
+  INACTIVE
+}
+
+enum UserNotificationKind {
+  PROJECT_UPDATED
+  TASK_ASSIGNED
+  AI_READY
+  BILLING_UPDATED
+  TRIAL_ENDING
+  SUBSCRIPTION_CANCELLED
+  ENTERPRISE_MEMBER_JOINED
+  ENTERPRISE_ROLE_CHANGED
+  ENTERPRISE_SECURITY_EVENT
+}
+
+enum MarketplaceItemType {
+  AGENT
+  WORKFLOW
+  PROMPT
+  TEMPLATE
+  PLUGIN
+}
+
+enum MarketplaceItemStatus {
+  DRAFT
+  REVIEW
+  PUBLISHED
+  REJECTED
+  ARCHIVED
+}
+
+enum MarketplaceReviewStatus {
+  PENDING
+  VISIBLE
+  HIDDEN
+}
+
+enum MarketplaceRevenueType {
+  SALE
+  PLATFORM_FEE
+  REFUND
+  PAYOUT
+}
+
+enum MarketplaceApiUsageStatus {
+  COMPLETED
+  REJECTED
+  FAILED
+}
+
+model User {
+  id            String          @id @default(cuid())
+  email         String          @unique
+  passwordHash  String?
+  createdAt     DateTime        @default(now())
+  activities    AdminActivity[]
+  memberships   Membership[]
+  notifications Notification[]
+  auditLogs     AuditLog[]
+  marketplaceCreator       MarketplaceCreator?
+  marketplaceReviews       MarketplaceReview[]
+  marketplaceFavorites     MarketplaceFavorite[]
+  reviewedMarketplaceItems MarketplaceItem[]        @relation("MarketplaceItemReviewer")
+  marketplaceItemVersions  MarketplaceItemVersion[] @relation("MarketplaceItemVersionCreator")
+}
+
+model Enterprise {
+  id                       String                    @id @default(cuid())
+  name                     String
+  domain                   String?
+  logo                     String?
+  status                   EnterpriseStatus          @default(ACTIVE)
+  createdAt                DateTime                  @default(now())
+  updatedAt                DateTime                  @updatedAt
+  organizations            Organization[]
+  departments              Department[]
+  memberships              Membership[]
+  workspaces               Workspace[]
+  projects                 WorkspaceProject[]
+  tasks                    ProjectTask[]
+  activities               ProjectActivity[]
+  documents                ProjectDocument[]
+  knowledge                WorkspaceKnowledgeDocument[]
+  embeddings               WorkspaceKnowledgeEmbedding[]
+  aiWorkspaces             AiWorkspace[]
+  aiAssistants             AiAssistant[]
+  aiDocuments              AiKnowledgeDocument[]
+  aiVectors                AiVectorDocument[]
+  aiDocumentJobs           AiDocumentJob[]
+  aiApiKeys                AiApiKey[]
+  aiAssistantUsageLogs     AiAssistantUsageLog[]
+  aiAgents                 AiAgent[]
+  aiAgentMemories          AiAgentMemory[]
+  aiKnowledgeEntities      AiKnowledgeEntity[]
+  aiKnowledgeRelations     AiKnowledgeRelation[]
+  aiWorkflows              AiWorkflow[]
+  aiEmployees              AiEmployee[]
+  aiTools                  AiTool[]
+  aiTaskRuns               AiTaskRun[]
+  aiApprovalRequests       AiApprovalRequest[]
+  aiTaskTraces             AiTaskTrace[]
+  aiReports                AiReport[]
+  aiGovernancePolicies     AiGovernancePolicy[]
+  aiApps                   AiApp[]
+  auditLogs                AuditLog[]
+  domains                  EnterpriseDomain[]
+  ssoConnections           SSOConnection[]
+  securityPolicy           EnterpriseSecurityPolicy?
+  resourcePermissionGrants ResourcePermissionGrant[]
+
+  @@index([status, createdAt])
+}
+
+model Department {
+  id             String       @id @default(cuid())
+  enterpriseId   String
+  organizationId String
+  name           String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  enterprise     Enterprise   @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  memberships    Membership[]
+  workspaces     Workspace[]
+
+  @@unique([organizationId, name])
+  @@index([enterpriseId, createdAt])
+}
+
+model EnterpriseDomain {
+  id                String     @id @default(cuid())
+  enterpriseId      String
+  domain            String     @unique
+  verificationToken String
+  verifiedAt        DateTime?
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  enterprise        Enterprise @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+
+  @@index([enterpriseId, verifiedAt])
+}
+
+model SSOConnection {
+  id              String                @id @default(cuid())
+  enterpriseId    String
+  provider        EnterpriseSsoProvider
+  metadata        Json
+  secretReference String?
+  enabled         Boolean               @default(false)
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @updatedAt
+  enterprise      Enterprise            @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+
+  @@index([enterpriseId, enabled, createdAt])
+}
+
+model EnterpriseSecurityPolicy {
+  id                    String     @id @default(cuid())
+  enterpriseId          String     @unique
+  requireSso            Boolean    @default(false)
+  requireMfa            Boolean    @default(false)
+  allowPersonalApiKeys  Boolean    @default(false)
+  sensitiveDataScanning Boolean    @default(true)
+  createdAt             DateTime   @default(now())
+  updatedAt             DateTime   @updatedAt
+  enterprise            Enterprise @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+}
+
+model Project {
+  id           String        @id @default(cuid())
+  title        String
+  slug         String
+  locale       String        @default("zh-CN")
+  translationGroup String?
+  description  String
+  content      String?
+  categories   String[]
+  technologies String[]
+  coverImage   String?
+  status       ProjectStatus @default(CONCEPT)
+  featured     Boolean       @default(false)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([updatedAt])
+  @@index([translationGroup, locale])
+  @@unique([locale, slug])
+}
+
+model Post {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String
+  locale          String   @default("zh-CN")
+  translationGroup String?
+  description     String
+  content         String
+  tags            String[]
+  keywords        String[] @default([])
+  category        String
+  coverImage      String?
+  ogImage         String?
+  seoTitle        String?
+  seoDescription  String?
+  canonical       String?
+  relatedPosts    String[] @default([])
+  relatedProjects String[] @default([])
+  relatedServices String[] @default([])
+  socialContent   Json?
+  published       Boolean  @default(false)
+  publishedAt     DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([published, publishedAt])
+  @@index([category, published])
+  @@index([translationGroup, locale])
+  @@unique([locale, slug])
+}
+
+model ContentPlan {
+  id          String   @id @default(cuid())
+  title       String
+  locale      String   @default("zh-CN")
+  keyword     String
+  category    String
+  status      String   @default("idea")
+  priority    String   @default("normal")
+  publishDate DateTime?
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([status, publishDate])
+  @@index([category, priority])
+  @@index([locale, status])
+}
+
+model Keyword {
+  id          String   @id @default(cuid())
+  keyword     String   @unique
+  category    String
+  difficulty  String?
+  volume      String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category, updatedAt])
+}
+
+model Newsletter {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  status    String   @default("pending")
+  source    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status, createdAt])
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String
+  locale      String   @default("zh-CN")
+  translationGroup String?
+  description String
+  category    String
+  content     String?
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+  @@index([translationGroup, locale])
+  @@unique([locale, slug])
+}
+
+model Message {
+  id        String        @id @default(cuid())
+  name      String
+  email     String
+  company   String?
+  service   String
+  budget    String?
+  timeline  String?
+  message   String
+  status    MessageStatus @default(UNREAD)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  lead      Lead?         @relation("ContactMessageLead")
+
+  @@index([status, createdAt])
+}
+
+model Lead {
+  id                  String       @id @default(cuid())
+  name                String
+  email               String
+  company             String?
+  source              String?
+  service             String?
+  budget              String?
+  timeline            String?
+  notes               String?
+  status              LeadStatus   @default(NEW)
+  priority            LeadPriority @default(MEDIUM)
+  score               Int          @default(0)
+  tags                String[]     @default([])
+  messageId           String?      @unique
+  followUpScheduledAt DateTime?
+  aiSummary           String?
+  aiCategory          String?
+  aiDifficulty        String?
+  aiSuggestedService  String?
+  aiQuestions         String[]     @default([])
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+  message             Message?     @relation("ContactMessageLead", fields: [messageId], references: [id], onDelete: SetNull)
+  activities          LeadActivity[]
+  tasks               CrmTask[]
+  projects            CrmProject[]
+  proposals           Proposal[]
+  meetings            MeetingNote[]
+
+  @@index([status, updatedAt])
+  @@index([source, createdAt])
+  @@index([email])
+}
+
+model LeadActivity {
+  id        String           @id @default(cuid())
+  leadId    String
+  type      LeadActivityType
+  content   String
+  createdAt DateTime         @default(now())
+  lead      Lead             @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId, createdAt])
+}
+
+model CrmTask {
+  id        String        @id @default(cuid())
+  title     String
+  leadId    String?
+  projectId String?
+  status    CrmTaskStatus @default(TODO)
+  dueDate   DateTime?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  lead      Lead?         @relation(fields: [leadId], references: [id], onDelete: SetNull)
+  project   CrmProject?   @relation(fields: [projectId], references: [id], onDelete: SetNull)
+
+  @@index([status, dueDate])
+  @@index([leadId, createdAt])
+  @@index([projectId, createdAt])
+}
+
+model CrmProject {
+  id               String            @id @default(cuid())
+  leadId           String?
+  title            String
+  description      String?
+  status           CrmProjectStatus  @default(PLANNING)
+  startedAt        DateTime?
+  dueDate          DateTime?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  lead             Lead?             @relation(fields: [leadId], references: [id], onDelete: SetNull)
+  tasks            CrmTask[]
+  aiPlans          AiProjectPlan[]
+  workspaceProject WorkspaceProject?
+
+  @@index([status, updatedAt])
+  @@index([leadId])
+}
+
+model Proposal {
+  id        String         @id @default(cuid())
+  leadId    String
+  title     String
+  content   String
+  status    ProposalStatus @default(DRAFT)
+  aiGenerated Boolean       @default(false)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  lead      Lead           @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([leadId, updatedAt])
+  @@index([status, updatedAt])
+}
+
+model AutomationRule {
+  id         String                @id @default(cuid())
+  name       String                @unique
+  trigger    AutomationRuleTrigger
+  action     AutomationRuleAction
+  delayHours Int                   @default(0)
+  enabled    Boolean               @default(true)
+  createdAt  DateTime              @default(now())
+  updatedAt  DateTime              @updatedAt
+
+  @@index([trigger, enabled])
+}
+
+model Knowledge {
+  id                 String              @id @default(cuid())
+  title              String
+  slug               String              @unique
+  content            String
+  category           String
+  source             String?
+  aiGenerated        Boolean             @default(false)
+  enabled            Boolean             @default(true)
+  syncStatus         KnowledgeSyncStatus @default(PENDING)
+  embeddingUpdatedAt DateTime?
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+
+  @@index([enabled, category])
+}
+
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MediaAsset {
+  id          String   @id @default(cuid())
+  pathname    String   @unique
+  url         String
+  contentType String
+  size        Int
+  createdAt   DateTime @default(now())
+}
+
+model AdminActivity {
+  id         String   @id @default(cuid())
+  action     String
+  resource   String
+  resourceId String?
+  summary    String
+  createdAt  DateTime @default(now())
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([createdAt])
+}
+
+model AnalyticsEvent {
+  id        String   @id @default(cuid())
+  event     String
+  path      String
+  metadata  Json?
+  createdAt DateTime @default(now())
+
+  @@index([event, createdAt])
+  @@index([path, createdAt])
+}
+
+model MeetingNote {
+  id        String   @id @default(cuid())
+  leadId    String?
+  content   String
+  summary   String
+  createdAt DateTime @default(now())
+  lead      Lead?    @relation(fields: [leadId], references: [id], onDelete: SetNull)
+
+  @@index([leadId, createdAt])
+}
+
+model AiContentDraft {
+  id                   String               @id @default(cuid())
+  topic                String
+  title                String
+  outline              String[]             @default([])
+  seoDescription       String
+  xiaohongshuDirection String
+  videoScript          String
+  status               AiContentDraftStatus @default(DRAFT)
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+
+  @@index([status, updatedAt])
+}
+
+model AiProjectPlan {
+  id        String              @id @default(cuid())
+  projectId String
+  summary   String
+  tasks     String[]            @default([])
+  status    AiProjectPlanStatus @default(DRAFT)
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+  project   CrmProject          @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId, updatedAt])
+  @@index([status, updatedAt])
+}
+
+model AiModelConfig {
+  id           String       @id @default(cuid())
+  provider     String
+  model        String
+  enabled      Boolean      @default(true)
+  priority     Int          @default(100)
+  maxTokens    Int          @default(1200)
+  dailyLimit   Int?
+  monthlyLimit Int?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  usageLogs    AiUsageLog[]
+
+  @@unique([provider, model])
+  @@index([enabled, priority])
+}
+
+model AiUsageLog {
+  id            String        @id @default(cuid())
+  agent         AiAgentType
+  status        AiUsageStatus
+  provider      String
+  model         String
+  inputTokens   Int           @default(0)
+  outputTokens  Int           @default(0)
+  costMicros    Int           @default(0)
+  modelConfigId String?
+  createdAt     DateTime      @default(now())
+  modelConfig   AiModelConfig? @relation(fields: [modelConfigId], references: [id], onDelete: SetNull)
+
+  @@index([agent, createdAt])
+  @@index([status, createdAt])
+  @@index([modelConfigId, createdAt])
+}
+
+model Prompt {
+  id        String   @id @default(cuid())
+  name      String
+  content   String
+  version   Int
+  enabled   Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([name, version])
+  @@index([name, enabled, version])
+}
+
+model NotificationChannel {
+  id        String                  @id @default(cuid())
+  type      NotificationChannelType @unique
+  enabled   Boolean                 @default(false)
+  createdAt DateTime                @default(now())
+  updatedAt DateTime                @updatedAt
+}
+
+model Organization {
+  id             String                     @id @default(cuid())
+  enterpriseId   String
+  name           String
+  slug           String                     @unique
+  logo           String?
+  lifecycleStage OrganizationLifecycleStage @default(LEAD)
+  createdAt      DateTime                   @default(now())
+  updatedAt      DateTime                   @updatedAt
+  enterprise     Enterprise                 @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  departments    Department[]
+  memberships    Membership[]
+  workspaces     Workspace[]
+  projects       WorkspaceProject[]
+  tasks          ProjectTask[]
+  activities     ProjectActivity[]
+  documents      ProjectDocument[]
+  knowledge      WorkspaceKnowledgeDocument[]
+  embeddings     WorkspaceKnowledgeEmbedding[]
+  auditLogs      AuditLog[]
+  billingEvents  BillingEvent[]
+  payments       Payment[]
+  subscription   Subscription?
+  usages         Usage[]
+  aiWorkspaces   AiWorkspace[]
+  aiAssistants   AiAssistant[]
+  aiDocuments    AiKnowledgeDocument[]
+  aiVectors      AiVectorDocument[]
+  aiDocumentJobs AiDocumentJob[]
+  aiApiKeys      AiApiKey[]
+  aiAssistantUsageLogs AiAssistantUsageLog[]
+  aiAgents                AiAgent[]
+  aiAgentMemories         AiAgentMemory[]
+  aiKnowledgeEntities     AiKnowledgeEntity[]
+  aiKnowledgeRelations    AiKnowledgeRelation[]
+  aiWorkflows             AiWorkflow[]
+  aiEmployees             AiEmployee[]
+  aiTools                 AiTool[]
+  aiTaskRuns              AiTaskRun[]
+  aiApprovalRequests      AiApprovalRequest[]
+  aiTaskTraces            AiTaskTrace[]
+  aiReports               AiReport[]
+  aiGovernancePolicies    AiGovernancePolicy[]
+  aiApps                  AiApp[]
+  marketplaceItems     MarketplaceItem[]
+  marketplaceApiUsages MarketplaceApiUsage[]
+  resourcePermissionGrants ResourcePermissionGrant[]
+
+  @@index([enterpriseId, createdAt])
+  @@index([createdAt])
+}
+
+model Role {
+  id          String           @id @default(cuid())
+  key         SaasRoleKey      @unique
+  name        String
+  description String
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  memberships Membership[]
+  permissions RolePermission[]
+}
+
+model Permission {
+  id          String           @id @default(cuid())
+  key         String           @unique
+  name        String
+  resource    String
+  action      String
+  description String
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  roles       RolePermission[]
+  resourcePermissionGrants ResourcePermissionGrant[]
+}
+
+model RolePermission {
+  roleId       String
+  permissionId String
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@index([permissionId])
+}
+
+model Membership {
+  id                String          @id @default(cuid())
+  userId            String
+  enterpriseId      String
+  organizationId    String
+  departmentId      String
+  roleId            String
+  status            MembershipStatus @default(ACTIVE)
+  joinedAt          DateTime        @default(now())
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  enterprise        Enterprise      @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization      Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  department        Department      @relation(fields: [departmentId], references: [id], onDelete: Restrict)
+  role              Role            @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  assignedTasks     ProjectTask[]   @relation("ProjectTaskAssignee")
+  projectActivities ProjectActivity[] @relation("ProjectActivityActor")
+  uploadedDocuments ProjectDocument[] @relation("ProjectDocumentUploader")
+  ownedProjects     WorkspaceProject[] @relation("WorkspaceProjectOwner")
+  createdAiApiKeys  AiApiKey[]         @relation("AiApiKeyCreator")
+  uploadedAiDocuments AiKnowledgeDocument[] @relation("AiKnowledgeDocumentUploader")
+  resourcePermissionGrants ResourcePermissionGrant[] @relation("ResourcePermissionGrantee")
+  createdResourcePermissionGrants ResourcePermissionGrant[] @relation("ResourcePermissionGrantCreator")
+  requestedAiTaskRuns              AiTaskRun[] @relation("AiTaskRunRequester")
+  reviewedAiApprovalRequests       AiApprovalRequest[] @relation("AiApprovalReviewer")
+  aiAssistantUsageLogs             AiAssistantUsageLog[] @relation("AiAssistantUsageActor")
+
+  @@unique([userId, organizationId])
+  @@index([enterpriseId, organizationId, status])
+  @@index([departmentId, createdAt])
+  @@index([organizationId, createdAt])
+  @@index([roleId])
+}
+
+model Workspace {
+  id             String             @id @default(cuid())
+  enterpriseId   String
+  organizationId String
+  departmentId   String
+  name           String
+  slug           String
+  description    String?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  enterprise     Enterprise         @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization   Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  department     Department         @relation(fields: [departmentId], references: [id], onDelete: Restrict)
+  projects       WorkspaceProject[]
+  tasks          ProjectTask[]
+  documents      ProjectDocument[]
+  knowledge      WorkspaceKnowledgeDocument[]
+
+  @@unique([organizationId, slug])
+  @@index([enterpriseId, organizationId, createdAt])
+  @@index([departmentId, createdAt])
+  @@index([organizationId, createdAt])
+}
+
+model WorkspaceProject {
+  id                String                 @id @default(cuid())
+  enterpriseId      String
+  organizationId    String
+  workspaceId       String
+  crmProjectId      String?                @unique
+  ownerMembershipId String?
+  title             String
+  description       String?
+  status            WorkspaceProjectStatus @default(PLANNING)
+  progress          Int                    @default(0)
+  createdAt         DateTime               @default(now())
+  updatedAt         DateTime               @updatedAt
+  enterprise        Enterprise             @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization      Organization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace         Workspace              @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  crmProject        CrmProject?            @relation(fields: [crmProjectId], references: [id], onDelete: SetNull)
+  owner             Membership?            @relation("WorkspaceProjectOwner", fields: [ownerMembershipId], references: [id], onDelete: SetNull)
+  tasks             ProjectTask[]
+  activities        ProjectActivity[]
+  documents         ProjectDocument[]
+  knowledge         WorkspaceKnowledgeDocument[]
+
+  @@index([enterpriseId, organizationId, updatedAt])
+  @@index([organizationId, updatedAt])
+  @@index([workspaceId, updatedAt])
+}
+
+model ProjectTask {
+  id                   String              @id @default(cuid())
+  enterpriseId         String
+  organizationId       String
+  workspaceId          String
+  projectId            String
+  assigneeMembershipId String?
+  title                String
+  description          String?
+  status               ProjectTaskStatus   @default(TODO)
+  priority             ProjectTaskPriority @default(MEDIUM)
+  dueDate              DateTime?
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+  enterprise           Enterprise          @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization         Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace            Workspace           @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  project              WorkspaceProject    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  assignee             Membership?         @relation("ProjectTaskAssignee", fields: [assigneeMembershipId], references: [id], onDelete: SetNull)
+
+  @@index([enterpriseId, organizationId, status, updatedAt])
+  @@index([organizationId, status, updatedAt])
+  @@index([workspaceId, createdAt])
+  @@index([projectId, status, updatedAt])
+}
+
+model ProjectActivity {
+  id                String              @id @default(cuid())
+  enterpriseId      String
+  organizationId    String
+  projectId         String
+  actorMembershipId String?
+  type              ProjectActivityType
+  content           String
+  metadata          Json?
+  createdAt         DateTime            @default(now())
+  enterprise        Enterprise          @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization      Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  project           WorkspaceProject    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  actor             Membership?         @relation("ProjectActivityActor", fields: [actorMembershipId], references: [id], onDelete: SetNull)
+
+  @@index([enterpriseId, organizationId, createdAt])
+  @@index([projectId, createdAt])
+  @@index([organizationId, createdAt])
+}
+
+model ProjectDocument {
+  id                   String                       @id @default(cuid())
+  enterpriseId         String
+  organizationId       String
+  workspaceId          String
+  projectId            String
+  uploadedByMembershipId String?
+  title                String
+  kind                 ProjectDocumentKind
+  content              String?
+  pathname             String?                      @unique
+  contentType          String?
+  size                 Int?
+  storageProvider      ProjectFileStorageProvider?
+  createdAt            DateTime                     @default(now())
+  updatedAt            DateTime                     @updatedAt
+  enterprise           Enterprise                   @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization         Organization                 @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace            Workspace                    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  project              WorkspaceProject             @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  uploadedBy           Membership?                  @relation("ProjectDocumentUploader", fields: [uploadedByMembershipId], references: [id], onDelete: SetNull)
+  knowledgeDocuments   WorkspaceKnowledgeDocument[]
+
+  @@index([enterpriseId, organizationId, createdAt])
+  @@index([organizationId, createdAt])
+  @@index([projectId, updatedAt])
+  @@index([workspaceId, createdAt])
+}
+
+model WorkspaceKnowledgeDocument {
+  id                 String          @id @default(cuid())
+  enterpriseId       String
+  organizationId     String
+  workspaceId        String
+  projectId          String?
+  documentId         String?         @unique
+  title              String
+  content            String
+  namespace          String
+  embeddingModel     String?
+  embeddingUpdatedAt DateTime?
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  enterprise         Enterprise      @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization       Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace          Workspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  project            WorkspaceProject? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  document           ProjectDocument? @relation(fields: [documentId], references: [id], onDelete: SetNull)
+  embedding          WorkspaceKnowledgeEmbedding?
+
+  @@index([enterpriseId, organizationId, namespace])
+  @@index([organizationId, namespace])
+  @@index([workspaceId, updatedAt])
+}
+
+model WorkspaceKnowledgeEmbedding {
+  id                  String                     @id @default(cuid())
+  enterpriseId        String
+  organizationId      String
+  knowledgeDocumentId String                     @unique
+  namespace           String
+  embedding           Unsupported("vector")?
+  createdAt           DateTime                   @default(now())
+  updatedAt           DateTime                   @updatedAt
+  enterprise          Enterprise                 @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization        Organization               @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  knowledgeDocument   WorkspaceKnowledgeDocument @relation(fields: [knowledgeDocumentId], references: [id], onDelete: Cascade)
+
+  @@index([enterpriseId, organizationId, namespace])
+  @@index([organizationId, namespace])
+}
+
+model AiWorkspace {
+  id             String                @id @default(cuid())
+  enterpriseId   String
+  organizationId String
+  name           String
+  slug           String
+  description    String?
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+  enterprise     Enterprise            @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization   Organization          @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  assistants     AiAssistant[]
+  documents      AiKnowledgeDocument[]
+  vectors        AiVectorDocument[]
+  jobs           AiDocumentJob[]
+  usageLogs      AiAssistantUsageLog[]
+  agents         AiAgent[]
+  agentMemories  AiAgentMemory[]
+  knowledgeEntities  AiKnowledgeEntity[]
+  knowledgeRelations AiKnowledgeRelation[]
+  workflows      AiWorkflow[]
+  employees      AiEmployee[]
+  tools          AiTool[]
+  taskRuns       AiTaskRun[]
+  approvalRequests AiApprovalRequest[]
+  taskTraces     AiTaskTrace[]
+  reports        AiReport[]
+  apps           AiApp[]
+
+  @@unique([organizationId, slug])
+  @@index([enterpriseId, organizationId, createdAt])
+  @@index([organizationId, createdAt])
+}
+
+model AiAssistant {
+  id                  String                 @id @default(cuid())
+  enterpriseId        String
+  organizationId      String
+  workspaceId         String
+  templateId          String?
+  name                String
+  slug                String
+  description         String?
+  systemPrompt        String
+  model               String
+  temperature         Float                  @default(0.2)
+  topK                Int                    @default(5)
+  similarityThreshold Float                  @default(0.12)
+  enabled             Boolean                @default(true)
+  createdAt           DateTime               @default(now())
+  updatedAt           DateTime               @updatedAt
+  enterprise          Enterprise             @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization        Organization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace           AiWorkspace            @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  template            AgentTemplate?         @relation(fields: [templateId], references: [id], onDelete: SetNull)
+  promptVersions      AiPromptVersion[]
+  usageLogs           AiAssistantUsageLog[]
+  app                 AiApp?                 @relation("AiAppAssistant")
+
+  @@unique([workspaceId, slug])
+  @@index([enterpriseId, organizationId, createdAt])
+  @@index([organizationId, createdAt])
+  @@index([workspaceId, enabled, updatedAt])
+}
+
+model AgentTemplate {
+  id           String        @id @default(cuid())
+  key          String        @unique
+  name         String
+  description  String
+  category     String
+  systemPrompt String
+  enabled      Boolean       @default(true)
+  sortOrder    Int           @default(0)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  assistants   AiAssistant[]
+
+  @@index([enabled, sortOrder])
+}
+
+model AiPromptVersion {
+  id          String      @id @default(cuid())
+  assistantId String
+  content     String
+  version     Int
+  createdAt   DateTime    @default(now())
+  assistant   AiAssistant @relation(fields: [assistantId], references: [id], onDelete: Cascade)
+
+  @@unique([assistantId, version])
+  @@index([assistantId, createdAt])
+}
+
+model AiKnowledgeDocument {
+  id                   String               @id @default(cuid())
+  enterpriseId         String
+  organizationId       String
+  workspaceId          String
+  uploadedByMembershipId String?
+  title                String
+  sourceType           AiDocumentSourceType
+  content              String?
+  pathname             String?              @unique
+  contentType          String?
+  size                 Int?
+  storageProvider      ProjectFileStorageProvider?
+  status               AiDocumentStatus     @default(UPLOADING)
+  chunkSize            Int                  @default(800)
+  chunkOverlap         Int                  @default(120)
+  errorMessage         String?
+  securityFindings     Json?
+  securityScannedAt    DateTime?
+  processedAt          DateTime?
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+  enterprise           Enterprise           @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization         Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace            AiWorkspace          @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  uploadedBy           Membership?          @relation("AiKnowledgeDocumentUploader", fields: [uploadedByMembershipId], references: [id], onDelete: SetNull)
+  chunks               AiVectorDocument[]
+  permissions          AiDocumentPermission[]
+  jobs                 AiDocumentJob[]
+
+  @@index([enterpriseId, organizationId, createdAt])
+  @@index([organizationId, createdAt])
+  @@index([workspaceId, status, updatedAt])
+}
+
+model AiVectorDocument {
+  id             String              @id @default(cuid())
+  enterpriseId   String
+  organizationId String
+  workspaceId    String
+  documentId     String
+  chunkIndex     Int
+  content        String
+  tokenCount     Int                 @default(0)
+  metadata       Json
+  embedding      Unsupported("vector")?
+  embeddingModel String?
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  enterprise     Enterprise          @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization   Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace      AiWorkspace         @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  document       AiKnowledgeDocument @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@unique([documentId, chunkIndex])
+  @@index([enterpriseId, organizationId, workspaceId, createdAt])
+  @@index([organizationId, workspaceId, createdAt])
+  @@index([workspaceId, documentId])
+}
+
+model AiDocumentPermission {
+  id         String              @id @default(cuid())
+  documentId String
+  roleKey    String
+  createdAt  DateTime            @default(now())
+  document   AiKnowledgeDocument @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@unique([documentId, roleKey])
+  @@index([roleKey])
+}
+
+model AiDocumentJob {
+  id             String              @id @default(cuid())
+  enterpriseId   String
+  organizationId String
+  workspaceId    String
+  documentId     String
+  kind           String
+  status         AiDocumentJobStatus @default(QUEUED)
+  attempts       Int                 @default(0)
+  errorMessage   String?
+  startedAt      DateTime?
+  completedAt    DateTime?
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  enterprise     Enterprise          @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization   Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace      AiWorkspace         @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  document       AiKnowledgeDocument @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@index([status, createdAt])
+  @@index([enterpriseId, organizationId, workspaceId, createdAt])
+  @@index([organizationId, workspaceId, createdAt])
+}
+
+model AiApiKey {
+  id                    String       @id @default(cuid())
+  enterpriseId          String
+  organizationId        String
+  createdByMembershipId String?
+  name                  String
+  prefix                String       @unique
+  keyHash               String
+  scopes                String[]     @default([])
+  lastUsedAt            DateTime?
+  expiresAt             DateTime?
+  revokedAt             DateTime?
+  createdAt             DateTime     @default(now())
+  updatedAt             DateTime     @updatedAt
+  enterprise            Enterprise   @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization          Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdBy             Membership?  @relation("AiApiKeyCreator", fields: [createdByMembershipId], references: [id], onDelete: SetNull)
+  marketplaceApiUsages  MarketplaceApiUsage[]
+
+  @@index([enterpriseId, organizationId, createdAt])
+  @@index([organizationId, createdAt])
+  @@index([organizationId, revokedAt])
+}
+
+model AiAssistantUsageLog {
+  id            String         @id @default(cuid())
+  enterpriseId  String
+  organizationId String
+  workspaceId   String
+  assistantId   String?
+  actorMembershipId String?
+  channel       AiUsageChannel
+  status        AiUsageStatus
+  model         String
+  inputTokens   Int            @default(0)
+  outputTokens  Int            @default(0)
+  costMicros    Int            @default(0)
+  createdAt     DateTime       @default(now())
+  enterprise    Enterprise     @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization  Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace     AiWorkspace    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  assistant     AiAssistant?   @relation(fields: [assistantId], references: [id], onDelete: SetNull)
+  actorMembership Membership?  @relation("AiAssistantUsageActor", fields: [actorMembershipId], references: [id], onDelete: SetNull)
+
+  @@index([enterpriseId, organizationId, createdAt])
+  @@index([organizationId, createdAt])
+  @@index([workspaceId, createdAt])
+  @@index([assistantId, createdAt])
+  @@index([actorMembershipId, createdAt])
+  @@index([status, createdAt])
+}
+
+model AiAgent {
+  id             String                 @id @default(cuid())
+  enterpriseId   String
+  organizationId String
+  workspaceId    String
+  name           String
+  role           AiOperatingAgentRole
+  systemPrompt   String
+  tools          Json
+  enabled        Boolean                @default(true)
+  createdAt      DateTime               @default(now())
+  updatedAt      DateTime               @updatedAt
+  enterprise     Enterprise             @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization   Organization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace      AiWorkspace            @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  memories       AiAgentMemory[]
+  employees      AiEmployee[]
+  traces         AiTaskTrace[]
+
+  @@unique([workspaceId, name])
+  @@index([enterpriseId, organizationId, workspaceId, enabled])
+  @@index([workspaceId, role, enabled])
+}
+
+model AiAgentMemory {
+  id             String            @id @default(cuid())
+  enterpriseId   String
+  organizationId String
+  workspaceId    String
+  agentId        String
+  type           AiAgentMemoryType
+  content        String
+  createdAt      DateTime          @default(now())
+  enterprise     Enterprise        @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization   Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace      AiWorkspace       @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  agent          AiAgent           @relation(fields: [agentId], references: [id], onDelete: Cascade)
+
+  @@index([enterpriseId, organizationId, workspaceId, createdAt])
+  @@index([agentId, type, createdAt])
+}
+
+model AiKnowledgeEntity {
+  id                String                  @id @default(cuid())
+  enterpriseId      String
+  organizationId    String
+  workspaceId       String
+  type              String
+  name              String
+  metadata          Json
+  createdAt         DateTime                @default(now())
+  updatedAt         DateTime                @updatedAt
+  enterprise        Enterprise              @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization      Organization            @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace         AiWorkspace             @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  outgoingRelations AiKnowledgeRelation[]   @relation("AiKnowledgeRelationSource")
+  incomingRelations AiKnowledgeRelation[]   @relation("AiKnowledgeRelationTarget")
+
+  @@unique([workspaceId, type, name])
+  @@index([enterpriseId, organizationId, workspaceId, type])
+}
+
+model AiKnowledgeRelation {
+  id             String              @id @default(cuid())
+  enterpriseId   String
+  organizationId String
+  workspaceId    String
+  sourceId       String
+  targetId       String
+  relation       String
+  metadata       Json?
+  createdAt      DateTime            @default(now())
+  enterprise     Enterprise          @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization   Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace      AiWorkspace         @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  source         AiKnowledgeEntity   @relation("AiKnowledgeRelationSource", fields: [sourceId], references: [id], onDelete: Cascade)
+  target         AiKnowledgeEntity   @relation("AiKnowledgeRelationTarget", fields: [targetId], references: [id], onDelete: Cascade)
+
+  @@unique([sourceId, targetId, relation])
+  @@index([enterpriseId, organizationId, workspaceId, createdAt])
+  @@index([sourceId, createdAt])
+  @@index([targetId, createdAt])
+}
+
+model AiWorkflow {
+  id             String       @id @default(cuid())
+  enterpriseId   String
+  organizationId String
+  workspaceId    String
+  name           String
+  description    String?
+  nodes          Json
+  edges          Json         @default("[]")
+  enabled        Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  enterprise     Enterprise   @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace      AiWorkspace  @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  taskRuns       AiTaskRun[]
+  apps           AiApp[]      @relation("AiAppWorkflow")
+
+  @@unique([workspaceId, name])
+  @@index([enterpriseId, organizationId, workspaceId, enabled])
+}
+
+model AiAppTemplate {
+  id          String      @id @default(cuid())
+  key         String      @unique
+  name        String
+  description String
+  category    String
+  type        AiAppType
+  config      Json
+  blocks      Json
+  workflow    Json
+  enabled     Boolean     @default(true)
+  sortOrder   Int         @default(0)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  apps        AiApp[]
+
+  @@index([enabled, sortOrder])
+}
+
+model AiApp {
+  id                String           @id @default(cuid())
+  enterpriseId      String
+  organizationId    String
+  workspaceId       String
+  templateId        String?
+  assistantId       String?          @unique
+  workflowId        String?
+  name              String
+  slug              String           @unique
+  description       String?
+  type              AiAppType
+  config            Json
+  blocks            Json
+  status            AiAppStatus      @default(DRAFT)
+  published         Boolean          @default(false)
+  activeEnvironment AiAppEnvironment @default(DEVELOPMENT)
+  publishedAt       DateTime?
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  enterprise        Enterprise       @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization      Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace         AiWorkspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  template          AiAppTemplate?   @relation(fields: [templateId], references: [id], onDelete: SetNull)
+  assistant         AiAssistant?     @relation("AiAppAssistant", fields: [assistantId], references: [id], onDelete: SetNull)
+  workflow          AiWorkflow?      @relation("AiAppWorkflow", fields: [workflowId], references: [id], onDelete: SetNull)
+  versions          AiAppVersion[]
+  accessRules       AiAppAccessRule[]
+
+  @@unique([workspaceId, name])
+  @@index([enterpriseId, organizationId, status, updatedAt])
+  @@index([organizationId, published, updatedAt])
+  @@index([workspaceId, status, updatedAt])
+}
+
+model AiAppVersion {
+  id          String           @id @default(cuid())
+  appId       String
+  version     String
+  environment AiAppEnvironment @default(DEVELOPMENT)
+  config      Json
+  blocks      Json
+  workflow    Json
+  createdAt   DateTime         @default(now())
+  app         AiApp            @relation(fields: [appId], references: [id], onDelete: Cascade)
+
+  @@unique([appId, version])
+  @@index([appId, createdAt])
+  @@index([environment, createdAt])
+}
+
+model AiAppAccessRule {
+  id        String              @id @default(cuid())
+  appId     String
+  kind      AiAppAccessRuleKind
+  subject   String?
+  createdAt DateTime            @default(now())
+  app       AiApp               @relation(fields: [appId], references: [id], onDelete: Cascade)
+
+  @@index([appId, kind])
+  @@index([kind, subject])
+}
+
+model AiEmployee {
+  id             String           @id @default(cuid())
+  enterpriseId   String
+  organizationId String
+  workspaceId    String
+  agentId        String
+  name           String
+  department     String
+  description    String?
+  status         AiEmployeeStatus @default(ACTIVE)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  enterprise     Enterprise       @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace      AiWorkspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  agent          AiAgent          @relation(fields: [agentId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, name])
+  @@index([enterpriseId, organizationId, workspaceId, status])
+  @@index([agentId, status])
+}
+
+model AiTool {
+  id                 String          @id @default(cuid())
+  enterpriseId       String
+  organizationId     String
+  workspaceId        String
+  key                String
+  name               String
+  description        String
+  schema             Json
+  requiredPermission String
+  riskLevel          AiToolRiskLevel
+  enabled            Boolean         @default(true)
+  builtin            Boolean         @default(false)
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  enterprise         Enterprise      @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization       Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace          AiWorkspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, key])
+  @@index([enterpriseId, organizationId, workspaceId, enabled])
+}
+
+model AiTaskRun {
+  id                      String              @id @default(cuid())
+  enterpriseId            String
+  organizationId          String
+  workspaceId             String
+  workflowId              String?
+  requestedByMembershipId String?
+  requestSummary          String
+  agentPlan               Json
+  toolKey                 String?
+  status                  AiWorkflowRunStatus @default(QUEUED)
+  outputSummary           String?
+  queuedAt                DateTime            @default(now())
+  startedAt               DateTime?
+  completedAt             DateTime?
+  enterprise              Enterprise          @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization            Organization        @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace               AiWorkspace         @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workflow                AiWorkflow?         @relation(fields: [workflowId], references: [id], onDelete: SetNull)
+  requestedBy             Membership?         @relation("AiTaskRunRequester", fields: [requestedByMembershipId], references: [id], onDelete: SetNull)
+  approvals               AiApprovalRequest[]
+  traces                  AiTaskTrace[]
+  reports                 AiReport[]
+
+  @@index([enterpriseId, organizationId, workspaceId, status, queuedAt])
+  @@index([workflowId, queuedAt])
+}
+
+model AiApprovalRequest {
+  id                      String           @id @default(cuid())
+  enterpriseId            String
+  organizationId          String
+  workspaceId             String
+  taskRunId               String
+  reviewedByMembershipId  String?
+  toolKey                 String
+  status                  AiApprovalStatus @default(PENDING)
+  payload                 Json
+  decisionNote            String?
+  requestedAt             DateTime         @default(now())
+  reviewedAt              DateTime?
+  executedAt              DateTime?
+  enterprise              Enterprise       @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization            Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace               AiWorkspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  taskRun                 AiTaskRun        @relation(fields: [taskRunId], references: [id], onDelete: Cascade)
+  reviewedBy              Membership?      @relation("AiApprovalReviewer", fields: [reviewedByMembershipId], references: [id], onDelete: SetNull)
+
+  @@index([enterpriseId, organizationId, workspaceId, status, requestedAt])
+  @@index([taskRunId, status])
+}
+
+model AiTaskTrace {
+  id             String           @id @default(cuid())
+  enterpriseId   String
+  organizationId String
+  workspaceId    String
+  taskRunId      String
+  agentId        String?
+  event          AiTraceEventType
+  toolKey        String?
+  payload        Json?
+  createdAt      DateTime         @default(now())
+  enterprise     Enterprise       @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace      AiWorkspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  taskRun        AiTaskRun        @relation(fields: [taskRunId], references: [id], onDelete: Cascade)
+  agent          AiAgent?         @relation(fields: [agentId], references: [id], onDelete: SetNull)
+
+  @@index([enterpriseId, organizationId, workspaceId, createdAt])
+  @@index([taskRunId, createdAt])
+}
+
+model AiReport {
+  id             String       @id @default(cuid())
+  enterpriseId   String
+  organizationId String
+  workspaceId    String
+  taskRunId      String?
+  title          String
+  content        String
+  format         String       @default("MARKDOWN")
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  enterprise     Enterprise   @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  workspace      AiWorkspace  @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  taskRun        AiTaskRun?   @relation(fields: [taskRunId], references: [id], onDelete: SetNull)
+
+  @@index([enterpriseId, organizationId, workspaceId, createdAt])
+  @@index([taskRunId, createdAt])
+}
+
+model AiGovernancePolicy {
+  id                 String       @id @default(cuid())
+  enterpriseId       String
+  organizationId     String
+  allowedModels      String[]     @default([])
+  enabledAgentRoles  String[]     @default([])
+  enabledToolKeys    String[]     @default([])
+  requireHumanApproval Boolean    @default(true)
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+  enterprise         Enterprise   @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization       Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId])
+  @@index([enterpriseId, organizationId])
+}
+
+model MarketplaceCreator {
+  id          String            @id @default(cuid())
+  userId      String            @unique
+  displayName String
+  bio         String?
+  avatarUrl   String?
+  verified    Boolean           @default(false)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  user        User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items       MarketplaceItem[]
+  revenues    MarketplaceRevenue[]
+
+  @@index([verified, createdAt])
+}
+
+model MarketplaceItem {
+  id               String                @id @default(cuid())
+  organizationId   String
+  creatorId        String
+  type             MarketplaceItemType
+  slug             String                @unique
+  title            String
+  description      String
+  category         String
+  tags             String[]              @default([])
+  priceCents       Int?
+  currency         String                @default("CNY")
+  status           MarketplaceItemStatus @default(DRAFT)
+  enabled          Boolean               @default(true)
+  manifest         Json
+  reviewReason     String?
+  publishedAt      DateTime?
+  reviewedAt       DateTime?
+  reviewedByUserId String?
+  usageCount       Int                   @default(0)
+  favoriteCount    Int                   @default(0)
+  ratingTotal      Int                   @default(0)
+  ratingCount      Int                   @default(0)
+  createdAt        DateTime              @default(now())
+  updatedAt        DateTime              @updatedAt
+  organization     Organization          @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  creator          MarketplaceCreator    @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  reviewedBy       User?                 @relation("MarketplaceItemReviewer", fields: [reviewedByUserId], references: [id], onDelete: SetNull)
+  versions         MarketplaceItemVersion[]
+  reviews          MarketplaceReview[]
+  favorites        MarketplaceFavorite[]
+  plugin           MarketplacePlugin?
+  revenues         MarketplaceRevenue[]
+  apiUsages        MarketplaceApiUsage[]
+
+  @@index([status, publishedAt])
+  @@index([creatorId, status, createdAt])
+  @@index([organizationId, status, createdAt])
+  @@index([category, status, publishedAt])
+}
+
+model MarketplaceItemVersion {
+  id              String          @id @default(cuid())
+  itemId          String
+  createdByUserId String?
+  version         String
+  content         Json
+  changelog       String?
+  artifactUrl     String?
+  artifactHash    String?
+  createdAt       DateTime        @default(now())
+  item            MarketplaceItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  createdBy       User?           @relation("MarketplaceItemVersionCreator", fields: [createdByUserId], references: [id], onDelete: SetNull)
+
+  @@unique([itemId, version])
+  @@index([itemId, createdAt])
+}
+
+model MarketplaceReview {
+  id        String                  @id @default(cuid())
+  itemId    String
+  userId    String
+  rating    Int
+  content   String?
+  status    MarketplaceReviewStatus @default(PENDING)
+  createdAt DateTime                @default(now())
+  updatedAt DateTime                @updatedAt
+  item      MarketplaceItem         @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  user      User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([itemId, userId])
+  @@index([itemId, status, createdAt])
+  @@index([userId, createdAt])
+}
+
+model MarketplaceFavorite {
+  itemId    String          
+  userId    String
+  createdAt DateTime        @default(now())
+  item      MarketplaceItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([itemId, userId])
+  @@index([userId, createdAt])
+}
+
+model MarketplacePlugin {
+  id                 String          @id @default(cuid())
+  itemId             String          @unique
+  type               String
+  config             Json
+  permissions        String[]        @default([])
+  enabled            Boolean         @default(false)
+  rateLimitPerMinute Int             @default(20)
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  item               MarketplaceItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@index([enabled, createdAt])
+}
+
+model MarketplaceRevenue {
+  id              String                 @id @default(cuid())
+  creatorId       String
+  itemId          String?
+  amountCents     Int
+  currency        String                 @default("CNY")
+  type            MarketplaceRevenueType
+  providerReference String?               @unique
+  availableAt     DateTime?
+  createdAt       DateTime               @default(now())
+  creator         MarketplaceCreator     @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  item            MarketplaceItem?      @relation(fields: [itemId], references: [id], onDelete: SetNull)
+
+  @@index([creatorId, createdAt])
+  @@index([itemId, createdAt])
+}
+
+model MarketplaceApiUsage {
+  id             String                    @id @default(cuid())
+  organizationId String
+  itemId         String
+  apiKeyId       String?
+  status         MarketplaceApiUsageStatus
+  inputTokens    Int                       @default(0)
+  outputTokens   Int                       @default(0)
+  createdAt      DateTime                  @default(now())
+  organization   Organization              @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  item           MarketplaceItem           @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  apiKey         AiApiKey?                 @relation(fields: [apiKeyId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, createdAt])
+  @@index([itemId, createdAt])
+  @@index([apiKeyId, createdAt])
+}
+
+model Plan {
+  id           String          @id @default(cuid())
+  key          String          @unique
+  slug         String          @unique
+  name         String
+  description  String
+  priceCents   Int
+  currency     String          @default("CNY")
+  billingCycle BillingCycle    @default(MONTHLY)
+  features     Json
+  limits       Json
+  active       Boolean         @default(true)
+  trialDays    Int             @default(7)
+  sortOrder    Int             @default(0)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  subscriptions Subscription[]
+}
+
+model Subscription {
+  id                     String             @id @default(cuid())
+  organizationId         String             @unique
+  planId                 String
+  status                 SubscriptionStatus @default(TRIALING)
+  provider               String?
+  providerCustomerId     String?
+  providerSubscriptionId String?            @unique
+  currentPeriodStartsAt  DateTime?
+  currentPeriodEndsAt    DateTime?
+  trialEndsAt            DateTime?
+  cancelAtPeriodEnd      Boolean            @default(false)
+  cancelledAt            DateTime?
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+  organization           Organization       @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  plan                   Plan               @relation(fields: [planId], references: [id], onDelete: Restrict)
+  invoices               Invoice[]
+  payments               Payment[]
+
+  @@index([planId, status])
+}
+
+model Invoice {
+  id             String        @id @default(cuid())
+  subscriptionId String
+  status         InvoiceStatus @default(DRAFT)
+  amountCents    Int
+  currency       String        @default("USD")
+  providerId     String?       @unique
+  issuedAt       DateTime?
+  dueAt          DateTime?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  subscription   Subscription  @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+
+  @@index([subscriptionId, createdAt])
+}
+
+model Payment {
+  id             String        @id @default(cuid())
+  organizationId String
+  subscriptionId String
+  status         PaymentStatus @default(PENDING)
+  amountCents    Int
+  currency       String        @default("CNY")
+  provider       String?
+  providerId     String?       @unique
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  subscription   Subscription  @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+
+  @@index([organizationId, createdAt])
+  @@index([subscriptionId, createdAt])
+}
+
+model Usage {
+  id             String       @id @default(cuid())
+  organizationId String
+  feature        String
+  count          Int          @default(0)
+  period         String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([organizationId, feature, period])
+  @@index([organizationId, period])
+}
+
+model BillingEvent {
+  id              String        @id @default(cuid())
+  organizationId  String?
+  provider        String
+  providerEventId String        @unique
+  type            String
+  payload         Json
+  processedAt     DateTime      @default(now())
+  createdAt       DateTime      @default(now())
+  organization    Organization? @relation(fields: [organizationId], references: [id], onDelete: SetNull)
+
+  @@index([organizationId, createdAt])
+  @@index([provider, type, createdAt])
+}
+
+model Notification {
+  id        String               @id @default(cuid())
+  userId    String
+  kind      UserNotificationKind
+  title     String
+  content   String
+  read      Boolean              @default(false)
+  createdAt DateTime             @default(now())
+  user      User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, read, createdAt])
+}
+
+model AuditLog {
+  id             String       @id @default(cuid())
+  enterpriseId   String
+  organizationId String
+  userId         String?
+  action         String
+  resource       String
+  resourceId     String?
+  metadata       Json?
+  ipHash         String?
+  createdAt      DateTime     @default(now())
+  enterprise     Enterprise   @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user           User?        @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([enterpriseId, organizationId, createdAt])
+  @@index([organizationId, createdAt])
+  @@index([userId, createdAt])
+}
+
+model ResourcePermissionGrant {
+  id                    String       @id @default(cuid())
+  enterpriseId          String
+  organizationId        String
+  membershipId          String
+  permissionId          String
+  resourceType          String
+  resourceId            String
+  createdByMembershipId String?
+  expiresAt             DateTime?
+  createdAt             DateTime     @default(now())
+  enterprise            Enterprise   @relation(fields: [enterpriseId], references: [id], onDelete: Cascade)
+  organization          Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  membership            Membership   @relation("ResourcePermissionGrantee", fields: [membershipId], references: [id], onDelete: Cascade)
+  permission            Permission   @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  createdBy             Membership?  @relation("ResourcePermissionGrantCreator", fields: [createdByMembershipId], references: [id], onDelete: SetNull)
+
+  @@unique([membershipId, permissionId, resourceType, resourceId])
+  @@index([enterpriseId, organizationId, resourceType, resourceId])
+  @@index([membershipId, expiresAt])
+}

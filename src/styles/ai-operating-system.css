@@ -1,0 +1,263 @@
+.aios-dashboard,
+.aios-observability,
+.aios-governance {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.aios-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--aios-metric-grid-min)), 1fr));
+  gap: var(--space-4);
+}
+
+.aios-metric {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-2) var(--space-3);
+  min-block-size: var(--aios-row-min-height);
+  align-content: center;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-card);
+  background: color-mix(in oklch, var(--color-surface-1) 94%, transparent);
+  padding: var(--space-4);
+}
+
+.aios-metric svg {
+  grid-row: span 2;
+  color: var(--color-accent-cyan);
+}
+
+.aios-metric span,
+.aios-metric small {
+  color: var(--color-text-tertiary);
+  font-family: var(--font-code);
+  font-size: var(--text-label-size);
+}
+
+.aios-metric strong {
+  color: var(--color-text-primary);
+  font-family: var(--font-code);
+  font-size: var(--text-heading-sm-size);
+  font-weight: var(--font-weight-medium);
+}
+
+.aios-metric strong small {
+  margin-inline-start: var(--space-1);
+}
+
+.aios-primary-grid,
+.aios-detail-grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.aios-task-composer,
+.aios-guardrail-panel,
+.aios-workflow-canvas {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-card);
+  background: color-mix(in oklch, var(--color-surface-1) 94%, transparent);
+  padding: var(--space-5);
+}
+
+.aios-panel-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.aios-panel-heading h2 {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-primary);
+  font-size: var(--text-heading-md-size);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-heading);
+}
+
+.aios-panel-heading > p {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  max-inline-size: 30rem;
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--text-body-sm-size);
+  line-height: var(--line-height-body);
+}
+
+.aios-panel-heading a {
+  color: var(--color-accent-cyan);
+  font-size: var(--text-body-sm-size);
+  text-decoration: none;
+}
+
+.aios-panel-heading a:hover {
+  color: var(--color-text-primary);
+}
+
+.aios-task-form {
+  display: grid;
+  gap: var(--space-4);
+  margin-block-start: var(--space-6);
+}
+
+.aios-task-form label {
+  display: grid;
+  gap: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--text-label-size);
+  font-weight: var(--font-weight-medium);
+}
+
+.aios-task-form select,
+.aios-task-form textarea {
+  inline-size: 100%;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-control);
+  background: var(--color-canvas-subtle);
+  color: var(--color-text-primary);
+  padding: var(--space-3);
+  transition:
+    border-color var(--aios-transition) var(--ease-out-curve),
+    background var(--aios-transition) var(--ease-out-curve);
+}
+
+.aios-task-form select {
+  min-block-size: var(--saas-control-height);
+}
+
+.aios-task-form textarea {
+  min-block-size: var(--aios-task-input-min-height);
+  line-height: var(--line-height-body);
+  resize: vertical;
+}
+
+.aios-task-form select:focus-visible,
+.aios-task-form textarea:focus-visible {
+  border-color: var(--color-brand-primary);
+  background: var(--color-surface-1);
+}
+
+.aios-task-form .saas-primary-button {
+  justify-self: start;
+}
+
+.aios-access-notice,
+.aios-inline-message {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin: var(--space-5) 0 0;
+  color: var(--color-text-secondary);
+  font-size: var(--text-body-sm-size);
+  line-height: var(--line-height-body);
+}
+
+.aios-access-notice svg {
+  flex: 0 0 auto;
+  color: var(--color-warning);
+}
+
+.aios-guardrail-panel {
+  display: grid;
+  align-content: start;
+  gap: var(--space-5);
+}
+
+.aios-guardrail-panel ul,
+.aios-status-list,
+.aios-approval-list,
+.aios-report-list,
+.aios-trace-list,
+.aios-run-list,
+.aios-observability-traces {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.aios-guardrail-panel li,
+.aios-definition-list > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  border-block-end: 1px solid var(--color-border-subtle);
+  color: var(--color-text-secondary);
+  font-size: var(--text-body-sm-size);
+  padding-block-end: var(--space-3);
+}
+
+.aios-guardrail-panel li:last-child {
+  border-block-end: 0;
+  padding-block-end: 0;
+}
+
+.aios-guardrail-panel strong,
+.aios-definition-list dd {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-family: var(--font-code);
+  font-size: var(--text-body-sm-size);
+  font-weight: var(--font-weight-medium);
+}
+
+.aios-guardrail-panel > p {
+  margin: 0;
+  color: var(--color-text-tertiary);
+  font-size: var(--text-body-sm-size);
+  line-height: var(--line-height-body);
+}
+
+.aios-workflow-canvas {
+  min-block-size: var(--aios-canvas-min-height);
+}
+
+.aios-workflow-nodes {
+  display: grid;
+  gap: var(--space-3);
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.aios-workflow-nodes li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+  min-block-size: var(--aios-row-min-height);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-control);
+  background: var(--color-canvas-subtle);
+  padding: var(--space-3) var(--space-4);
+}
+
+.aios-workflow-nodes li > span {
+  display: grid;
+  inline-size: var(--space-6);
+  block-size: var(--space-6);
+  place-items: center;
+  border-radius: var(--radius-pill);
+  background: color-mix(in oklch, var(--color-brand-primary) 20%, var(--color-surface-1));
+  color: var(--color-text-primary);
+  font-family: var(--font-code);
+  font-size: var(--text-label-size);
+}
+
+.aios-workflow-nodes strong {
+  min-inline-size: 0;
+  color: var(--color-text-primary);
+  font-size: var(--text-body-sm-size);
+  font-weight: var(--font-weight-medium);
+  overflow-wrap: anywhere;
+}
+
+.aios-workflow-nodes svg {
+  color: var(--color-text-tertiary);
+}

@@ -1,0 +1,18 @@
+@layer components {
+  .prose-content {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    max-inline-size: var(--container-text-max);
+  }
+
+  .prose-content > * + * {
+    margin-block-start: var(--space-5);
+  }
+
+  .prose-content a {
+    color: var(--color-text-primary);
+    text-decoration-line: underline;
+    text-decoration-color: var(--color-brand-reference);
+    text-underline-offset: 0.2em;
+  }
+}

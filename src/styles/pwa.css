@@ -1,0 +1,154 @@
+@layer components {
+  .offline-page {
+    align-items: center;
+    display: flex;
+    min-block-size: 100dvh;
+    padding-block: calc(var(--navigation-height) + var(--section-space-sm)) var(--section-space-sm);
+  }
+
+  .offline-page-inner {
+    width: 100%;
+  }
+
+  .offline-page-card {
+    background:
+      radial-gradient(
+        28rem circle at 90% 12%,
+        color-mix(in oklch, var(--color-brand-reference) 16%, transparent),
+        transparent 70%
+      ),
+      var(--color-surface-1);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-media);
+    padding: clamp(var(--space-6), 8vw, var(--space-12));
+  }
+
+  .offline-page-eyebrow {
+    color: var(--color-accent-cyan);
+    font-family: var(--font-code);
+    font-size: var(--type-caption);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+    margin: 0 0 var(--space-5);
+  }
+
+  .offline-page-description {
+    margin-top: var(--space-5);
+  }
+
+  .offline-page-link {
+    align-items: center;
+    background: var(--color-action-primary);
+    border-radius: var(--radius-control);
+    color: var(--color-text-primary);
+    display: inline-flex;
+    font-size: var(--type-body-sm);
+    font-weight: 600;
+    margin-top: var(--space-8);
+    min-block-size: var(--button-md-height);
+    padding-inline: var(--space-4);
+    text-decoration: none;
+    transition:
+      background-color var(--motion-fast) var(--ease-out-curve),
+      transform var(--motion-fast) var(--ease-out-curve);
+  }
+
+  .offline-page-link:hover {
+    background: var(--color-action-primary-hover);
+    transform: translateY(calc(var(--space-1) * -0.5));
+  }
+
+  .pwa-mobile-install-action,
+  .pwa-mobile-install-spacer {
+    display: none;
+  }
+
+  @media (max-width: 47.999rem) {
+    .pwa-install-entry[data-visible='true'] .pwa-mobile-install-spacer {
+      display: block;
+      min-block-size: calc(
+        var(--pwa-install-action-height) + var(--space-16) + env(safe-area-inset-bottom)
+      );
+    }
+
+    .pwa-mobile-install-action {
+      background: color-mix(in oklch, var(--color-canvas) 92%, transparent);
+      border-top: 1px solid var(--color-border-subtle);
+      bottom: 0;
+      display: block;
+      inset-inline: 0;
+      padding: var(--space-3) var(--space-5) calc(var(--space-3) + env(safe-area-inset-bottom));
+      position: fixed;
+      z-index: var(--z-popover);
+    }
+
+    @supports (backdrop-filter: blur(1px)) {
+      .pwa-mobile-install-action {
+        backdrop-filter: blur(18px);
+      }
+    }
+
+    .pwa-mobile-install-inner {
+      margin-inline: auto;
+      max-inline-size: var(--container-content-max);
+    }
+
+    .pwa-install-button {
+      align-items: center;
+      background: var(--color-action-primary);
+      border: 0;
+      border-radius: var(--radius-control);
+      color: var(--color-text-primary);
+      display: inline-flex;
+      font-size: var(--type-body-sm);
+      font-weight: 600;
+      gap: var(--space-2);
+      justify-content: center;
+      min-block-size: var(--pwa-install-action-height);
+      transition:
+        background-color var(--motion-fast) var(--ease-out-curve),
+        opacity var(--motion-fast) var(--ease-out-curve),
+        transform var(--motion-fast) var(--ease-out-curve);
+      width: 100%;
+    }
+
+    .pwa-install-button:hover:not(:disabled) {
+      background: var(--color-action-primary-hover);
+      transform: translateY(calc(var(--space-1) * -0.5));
+    }
+
+    .pwa-install-button:disabled {
+      cursor: wait;
+      opacity: 0.7;
+    }
+
+    .pwa-install-instructions {
+      color: var(--color-text-secondary);
+      font-size: var(--type-caption);
+      line-height: 1.5;
+      margin: var(--space-3) var(--space-1) 0;
+      text-align: center;
+    }
+
+    .pwa-install-entry[data-visible='true'] ~ .assistant-launcher {
+      bottom: calc(var(--pwa-install-action-height) + var(--space-6) + env(safe-area-inset-bottom));
+    }
+
+    @supports (padding: max(0px)) {
+      .hero-inner {
+        padding-top: max(
+          calc(var(--navigation-height) + var(--space-12)),
+          calc(env(safe-area-inset-top) + var(--navigation-height) + var(--space-8))
+        );
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .offline-page-link,
+  .pwa-install-button {
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,53 @@
+---
+title: 'Building a Maintainable Spring Boot + Vue Admin System'
+slug: 'springboot-vue-management-system'
+description: 'A practical account of balancing maintainability and delivery pace across discovery, permission boundaries and Spring Boot + Vue collaboration.'
+category: 'backend'
+tags: ['Java', 'Spring Boot', 'Vue', 'Architecture']
+publishedAt: '2026-07-25'
+updatedAt: '2026-07-25'
+readingTime: 6
+featured: true
+isPrimary: true
+draft: false
+author: 'Tong'
+locale: 'en-US'
+---
+
+# Building a Maintainable Spring Boot + Vue Admin System
+
+An enterprise interface is more than forms and tables. The decisions that shape future delivery are usually made before the first screen is polished: who owns a business object, where permission is enforced, and how frontend and backend teams share an API contract.
+
+This article describes a compact approach for small and mid-sized operations products. The goal is not to prescribe a perfect architecture, but to leave each team with boundaries it can evolve safely.
+
+## Start with business objects, not screens
+
+List the long-lived objects in the business language: users, roles, stores, orders, inventory and approvals. For every object, answer three questions: who creates it, who reads it, and who changes it.
+
+| Layer               | Primary responsibility                                        | It should not decide                |
+| ------------------- | ------------------------------------------------------------- | ----------------------------------- |
+| Vue interface       | collect intent, present state and guide the next action       | whether a user truly has permission |
+| Spring Boot service | validate rules, coordinate a use case and manage transactions | how a specific page is composed     |
+| Database            | preserve facts and protect key relationships                  | hidden business assumptions         |
+
+## Enforce permission on the server boundary
+
+The frontend can make a permitted path easy to use, but the backend remains the final decision point. A write operation should make the permission check and the state change visible in the same application use case.
+
+```java
+@Transactional
+public void updateOrderStatus(UpdateOrderStatusCommand command, CurrentUser currentUser) {
+    permissionChecker.require(currentUser, "order:update");
+    Order order = orderRepository.requireById(command.orderId());
+    order.changeStatus(command.status());
+    orderRepository.save(order);
+}
+```
+
+The important part is not the annotation. It is the traceable boundary: auditing, notifications and approval rules have a clear place to join later.
+
+## Keep the contract shared
+
+Make paging, error shapes, time zones, null semantics and list projections explicit. Vue pages should concentrate request state in a composable or data layer rather than scattering it across click handlers.
+
+When the object model, permission boundary and API contract are stable, interface refinement and reporting become safer. That sequence keeps delivery moving without turning every next feature into a structural rewrite.

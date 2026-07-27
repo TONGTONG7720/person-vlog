@@ -1,0 +1,32 @@
+# Dependencies and build output
+/node_modules
+/.next
+/out
+/coverage
+/test-results
+/playwright-report
+/blob-report
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.*
+!.env.example
+!.env.enterprise.example
+
+# Tooling output
+*.tsbuildinfo
+*.log
+.eslintcache
+
+# Local agent metadata and visual evidence
+/.omo
+/.superpowers
+
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+.idea
+.vscode/*
+!.vscode/extensions.json

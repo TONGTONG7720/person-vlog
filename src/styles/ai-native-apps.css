@@ -1,0 +1,1136 @@
+.ai-apps-dashboard,
+.ai-app-builder,
+.ai-internal-marketplace,
+.ai-app-runtime-page {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.ai-apps-intro,
+.ai-internal-marketplace-intro,
+.ai-app-runtime-hero {
+  position: relative;
+  overflow: clip;
+}
+
+.ai-app-analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--aios-metric-grid-min), 1fr));
+  gap: var(--space-4);
+}
+
+.ai-app-analytics-metric {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  min-block-size: 8.5rem;
+  padding: var(--space-5);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-card);
+  background: var(--color-surface-raised);
+  transition:
+    border-color var(--ai-app-transition),
+    background var(--ai-app-transition),
+    transform var(--ai-app-transition);
+}
+
+.ai-app-analytics-metric > svg {
+  color: var(--color-accent-cyan);
+}
+
+.ai-app-analytics-metric > span {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.ai-app-analytics-metric > strong {
+  grid-column: 1 / -1;
+  font-size: var(--font-size-2xl);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.ai-app-analytics-metric:hover {
+  border-color: var(--color-border-default);
+  background: var(--color-surface-raised-hover);
+  transform: translateY(-0.125rem);
+}
+
+.ai-app-template-directory,
+.ai-app-directory,
+.ai-app-preview,
+.ai-app-workflow-canvas,
+.ai-app-chat,
+.ai-internal-marketplace-intro,
+.ai-app-runtime-hero {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-card);
+  background: var(--color-surface-raised);
+}
+
+.ai-app-template-directory,
+.ai-app-directory,
+.ai-internal-marketplace-intro,
+.ai-app-runtime-hero {
+  padding: var(--space-6);
+}
+
+.ai-app-section-title,
+.ai-app-panel-heading,
+.ai-app-workflow-header,
+.ai-app-section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.ai-app-section-title h2,
+.ai-app-panel-heading h2,
+.ai-app-workflow-header h2,
+.ai-app-section-heading h3,
+.ai-app-template-directory h3,
+.ai-app-directory h3,
+.ai-internal-marketplace h2,
+.ai-app-runtime-hero h1 {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-primary);
+}
+
+.ai-app-section-title > p,
+.ai-app-section-heading > small,
+.ai-app-workflow-header > p,
+.ai-app-directory time,
+.ai-app-template-note p,
+.ai-app-delivery > p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+}
+
+.ai-app-template-grid,
+.ai-internal-marketplace-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--ai-app-market-grid-min), 1fr));
+  gap: var(--space-4);
+  margin-block-start: var(--space-6);
+}
+
+.ai-app-template-grid > article,
+.ai-internal-marketplace-grid > article {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-block-size: 17rem;
+  padding: var(--space-5);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-control);
+  background: var(--color-canvas-subtle);
+  transition:
+    border-color var(--ai-app-transition),
+    background var(--ai-app-transition),
+    transform var(--ai-app-transition);
+}
+
+.ai-app-template-grid > article:hover,
+.ai-internal-marketplace-grid > article:hover {
+  border-color: var(--color-border-strong);
+  background: var(--color-surface-1);
+  transform: translateY(-0.125rem);
+}
+
+.ai-app-template-grid > article > div,
+.ai-internal-app-card-topline,
+.ai-app-preview-blocks,
+.ai-app-runtime-hero > div:last-child,
+.ai-app-directory-actions,
+.ai-app-builder-actions,
+.ai-app-canvas-node-actions,
+.ai-app-access-composer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.ai-app-template-grid span,
+.ai-internal-app-card-topline > span,
+.ai-app-preview > .ai-app-panel-heading > span,
+.ai-app-preview-blocks > span,
+.ai-app-directory-name > span,
+.ai-app-builder-actions > span {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 1.625rem;
+  padding-inline: var(--space-2);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+.ai-app-template-grid small,
+.ai-internal-app-card-topline > svg {
+  color: var(--color-accent-cyan);
+}
+
+.ai-app-template-grid p,
+.ai-internal-marketplace-grid p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.ai-app-template-grid a,
+.ai-internal-marketplace-grid a,
+.ai-app-directory-actions a,
+.ai-app-delivery a,
+.ai-internal-marketplace-back,
+.ai-app-runtime-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+}
+
+.ai-app-template-grid a,
+.ai-internal-marketplace-grid a {
+  margin-block-start: auto;
+  color: var(--color-accent-cyan);
+}
+
+.ai-app-template-grid a:hover,
+.ai-internal-marketplace-grid a:hover,
+.ai-app-directory-actions a:hover,
+.ai-app-delivery a:hover,
+.ai-internal-marketplace-back:hover,
+.ai-app-runtime-back:hover {
+  color: var(--color-accent-cyan);
+}
+
+.ai-app-muted-action {
+  margin-block-start: auto;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-sm);
+}
+
+.ai-app-directory {
+  padding: var(--space-6);
+}
+
+.ai-app-directory-list,
+.ai-app-current-blocks ul,
+.ai-app-tool-list,
+.ai-app-access-list,
+.ai-app-chat-sources ul {
+  display: grid;
+  gap: var(--space-2);
+  padding: 0;
+  margin: var(--space-5) 0 0;
+  list-style: none;
+}
+
+.ai-app-directory-list > li {
+  display: grid;
+  grid-template-columns: minmax(14rem, 1.55fr) minmax(13rem, 1fr) minmax(8rem, auto) auto;
+  align-items: center;
+  gap: var(--space-5);
+  min-block-size: 6rem;
+  padding: var(--space-4) 0;
+  border-block-start: 1px solid var(--color-border-subtle);
+}
+
+.ai-app-directory-name {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.ai-app-directory-name > div,
+.ai-app-chat-messages article > p,
+.ai-app-chat-sources li > span {
+  min-inline-size: 0;
+}
+
+.ai-app-directory-name strong,
+.ai-app-directory-name small,
+.ai-app-chat-messages article > p,
+.ai-app-chat-sources li > span {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.ai-app-directory-name small {
+  margin-block-start: var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.ai-app-directory-list dl,
+.ai-internal-marketplace-grid dl {
+  display: flex;
+  gap: var(--space-4);
+  margin: 0;
+}
+
+.ai-app-directory-list dl > div,
+.ai-internal-marketplace-grid dl > div {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.ai-app-directory-list dt,
+.ai-internal-marketplace-grid dt {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+}
+
+.ai-app-directory-list dd,
+.ai-internal-marketplace-grid dd {
+  margin: 0;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.ai-app-directory-actions {
+  justify-content: flex-end;
+}
+
+.ai-app-directory-actions a {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-control);
+  background: var(--color-canvas-subtle);
+  font-size: var(--font-size-sm);
+}
+
+.ai-app-directory-name > span[data-status='TESTING'],
+.ai-app-builder-actions > span[data-status='TESTING'] {
+  border-color: color-mix(in oklch, var(--color-warning) 65%, var(--color-border-default));
+  color: var(--color-warning);
+}
+
+.ai-app-directory-name > span[data-status='PUBLISHED'],
+.ai-app-builder-actions > span[data-status='PUBLISHED'] {
+  border-color: color-mix(in oklch, var(--color-success) 65%, var(--color-border-default));
+  color: var(--color-success);
+}
+
+.ai-app-directory-name > span[data-status='ARCHIVED'],
+.ai-app-builder-actions > span[data-status='ARCHIVED'] {
+  color: var(--color-text-tertiary);
+}
+
+.ai-app-empty-directory {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-3);
+  padding: var(--space-8);
+  color: var(--color-text-secondary);
+}
+
+.ai-app-empty-directory h2,
+.ai-app-empty-directory p {
+  margin: 0;
+}
+
+.ai-app-empty-directory > svg {
+  color: var(--color-accent-cyan);
+}
+
+.ai-app-builder-page-content {
+  max-inline-size: none;
+}
+
+.ai-app-builder {
+  min-block-size: var(--ai-app-builder-min-height);
+}
+
+.ai-app-builder-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6);
+  padding-block-end: var(--space-2);
+}
+
+.ai-app-builder-header h1 {
+  margin: var(--space-1) 0 0;
+  font-size: var(--font-size-3xl);
+}
+
+.ai-app-builder-header p:not(.saas-kicker) {
+  max-inline-size: 47rem;
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.ai-app-builder-actions {
+  justify-content: flex-end;
+}
+
+.ai-app-builder-grid {
+  display: grid;
+  grid-template-columns:
+    minmax(14rem, var(--ai-app-builder-palette-inline)) minmax(0, 2.1fr)
+    minmax(14rem, var(--ai-app-builder-palette-inline));
+  align-items: start;
+  gap: var(--space-4);
+}
+
+.ai-app-builder-palette,
+.ai-app-builder-inspector {
+  position: sticky;
+  inset-block-start: calc(var(--navigation-height) + var(--space-4));
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--space-5);
+  max-block-size: calc(100dvh - var(--navigation-height) - var(--space-8));
+  overflow: auto;
+}
+
+.ai-app-builder-main {
+  display: grid;
+  gap: var(--space-4);
+  min-inline-size: 0;
+}
+
+.ai-app-field,
+.ai-app-fields {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.ai-app-fields {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ai-app-field-wide {
+  grid-column: 1 / -1;
+}
+
+.ai-app-field > span,
+.ai-app-block-library > p,
+.ai-app-current-blocks > p {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.ai-app-field input,
+.ai-app-field select,
+.ai-app-field textarea,
+.ai-app-access-composer select {
+  inline-size: 100%;
+  min-block-size: var(--saas-control-height);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-control);
+  background: var(--color-canvas-subtle);
+  color: var(--color-text-primary);
+  outline: none;
+  transition:
+    border-color var(--ai-app-transition),
+    background var(--ai-app-transition);
+}
+
+.ai-app-field textarea {
+  resize: vertical;
+}
+
+.ai-app-field input:focus,
+.ai-app-field select:focus,
+.ai-app-field textarea:focus,
+.ai-app-access-composer select:focus {
+  border-color: var(--color-brand-reference);
+  background: var(--color-surface-1);
+}
+
+.ai-app-template-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-inline-start: 2px solid var(--color-accent-cyan);
+  background: color-mix(in oklch, var(--color-accent-cyan) 5%, transparent);
+}
+
+.ai-app-template-note > svg {
+  flex: none;
+  margin-block-start: 0.125rem;
+  color: var(--color-accent-cyan);
+}
+
+.ai-app-block-library,
+.ai-app-current-blocks,
+.ai-app-inspector-section {
+  display: grid;
+  gap: var(--space-3);
+  padding-block-start: var(--space-5);
+  border-block-start: 1px solid var(--color-border-subtle);
+}
+
+.ai-app-block-library > button {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-2);
+  min-block-size: var(--saas-control-height);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-control);
+  background: var(--color-canvas-subtle);
+  color: var(--color-text-primary);
+  text-align: start;
+  transition:
+    border-color var(--ai-app-transition),
+    background var(--ai-app-transition),
+    transform var(--ai-app-transition);
+}
+
+.ai-app-block-library > button:hover {
+  border-color: var(--color-border-strong);
+  background: var(--color-surface-2);
+  transform: translateX(0.125rem);
+}
+
+.ai-app-block-library > button > svg:first-child {
+  color: var(--color-text-tertiary);
+}
+
+.ai-app-block-library > button > svg:last-child {
+  color: var(--color-accent-cyan);
+}
+
+.ai-app-current-blocks li,
+.ai-app-access-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-block-start: 1px solid var(--color-border-subtle);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.ai-app-current-blocks button,
+.ai-app-access-list button {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border: 0;
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--color-text-tertiary);
+}
+
+.ai-app-current-blocks button:hover:not(:disabled),
+.ai-app-access-list button:hover:not(:disabled) {
+  background: color-mix(in oklch, var(--color-danger) 12%, transparent);
+  color: var(--color-danger);
+}
+
+.ai-app-workflow-canvas {
+  overflow: hidden;
+  min-block-size: var(--aios-canvas-min-height);
+}
+
+.ai-app-workflow-header {
+  padding: var(--space-5);
+  border-block-end: 1px solid var(--color-border-subtle);
+}
+
+.ai-app-workflow-header > p {
+  display: flex;
+  align-items: center;
+  max-inline-size: 20rem;
+  gap: var(--space-2);
+  text-align: end;
+}
+
+.ai-app-workflow-header svg {
+  flex: none;
+  color: var(--color-accent-cyan);
+}
+
+.ai-app-react-flow {
+  min-block-size: clamp(20rem, 48vw, 32rem);
+  background: var(--color-canvas-subtle);
+}
+
+.ai-app-react-flow .react-flow__node-default {
+  min-inline-size: var(--ai-app-canvas-node-inline);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-control);
+  background: var(--color-surface-1);
+  color: var(--color-text-primary);
+  box-shadow: none;
+  font-size: var(--font-size-sm);
+  transition:
+    border-color var(--ai-app-transition),
+    transform var(--ai-app-transition);
+}
+
+.ai-app-react-flow .react-flow__node-default.selected,
+.ai-app-react-flow .react-flow__node-default:focus-visible {
+  border-color: var(--color-brand-reference);
+  box-shadow: 0 0 0 1px var(--color-brand-reference);
+}
+
+.ai-app-react-flow .react-flow__edge-path {
+  stroke: var(--color-accent-cyan);
+  stroke-width: 1.25;
+}
+
+.ai-app-react-flow .react-flow__controls {
+  overflow: hidden;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-control);
+  box-shadow: none;
+}
+
+.ai-app-react-flow .react-flow__controls button {
+  border-block-end-color: var(--color-border-subtle);
+  background: var(--color-surface-1);
+  fill: var(--color-text-primary);
+}
+
+.ai-app-react-flow .react-flow__controls button:hover {
+  background: var(--color-surface-2);
+}
+
+.ai-app-canvas-node-actions {
+  padding: var(--space-3) var(--space-5) var(--space-5);
+  border-block-start: 1px solid var(--color-border-subtle);
+}
+
+.ai-app-canvas-node-actions > button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-block-size: 2.25rem;
+  padding-inline: var(--space-3);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+}
+
+.ai-app-canvas-node-actions > button:hover {
+  border-color: var(--color-brand-reference);
+  color: var(--color-text-primary);
+}
+
+.ai-app-preview {
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--space-5);
+}
+
+.ai-app-preview-window {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-3);
+  min-block-size: var(--ai-app-preview-min-height);
+  padding: var(--space-5);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-control);
+  background: var(--color-canvas-subtle);
+}
+
+.ai-app-preview-window > svg {
+  color: var(--color-accent-cyan);
+}
+
+.ai-app-preview-window strong,
+.ai-app-preview-window p {
+  margin: 0;
+}
+
+.ai-app-preview-window p {
+  margin-block-start: var(--space-2);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.ai-app-preview-blocks {
+  grid-column: 1 / -1;
+  align-self: end;
+}
+
+.ai-app-preview-blocks > span {
+  border-color: var(--color-border-subtle);
+  color: var(--color-text-tertiary);
+}
+
+.ai-app-chat {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-5);
+}
+
+.ai-app-chat > header h2,
+.ai-app-chat > header p {
+  margin: 0;
+}
+
+.ai-app-chat > header p:not(.saas-kicker) {
+  margin-block-start: var(--space-2);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.ai-app-chat-messages {
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+  min-block-size: 13rem;
+  max-block-size: var(--ai-app-chat-max-block-size);
+  overflow: auto;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-control);
+  background: var(--color-canvas-subtle);
+}
+
+.ai-app-chat-empty {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: var(--space-3);
+  min-block-size: 10rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.ai-app-chat-empty > svg {
+  color: var(--color-accent-cyan);
+}
+
+.ai-app-chat-empty p {
+  max-inline-size: 26rem;
+  margin: 0;
+}
+
+.ai-app-chat-messages article {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-control);
+  background: var(--color-surface-raised);
+}
+
+.ai-app-chat-messages article[data-role='user'] {
+  background: color-mix(in oklch, var(--color-brand-reference) 11%, var(--color-surface-1));
+}
+
+.ai-app-chat-messages article > span {
+  display: grid;
+  place-items: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-pill);
+  color: var(--color-accent-cyan);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+}
+
+.ai-app-chat-messages article[data-role='user'] > span {
+  color: var(--color-text-primary);
+}
+
+.ai-app-chat-messages article > p {
+  margin: 0;
+  color: var(--color-text-primary);
+  line-height: var(--line-height-relaxed);
+  white-space: pre-wrap;
+}
+
+.ai-app-chat-sources {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.ai-app-chat-sources > div {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.ai-app-chat-sources > div > svg {
+  color: var(--color-accent-cyan);
+}
+
+.ai-app-chat-sources > p {
+  margin: 0;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-sm);
+}
+
+.ai-app-chat-sources li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.ai-app-chat-sources small {
+  flex: none;
+  color: var(--color-text-tertiary);
+}
+
+.ai-app-chat form {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.ai-app-chat textarea {
+  inline-size: 100%;
+  min-block-size: 6.5rem;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-control);
+  background: var(--color-canvas-subtle);
+  color: var(--color-text-primary);
+  resize: vertical;
+}
+
+.ai-app-chat textarea:focus {
+  border-color: var(--color-brand-reference);
+  outline: none;
+}
+
+.ai-app-chat form > button {
+  justify-self: end;
+}
+
+.ai-app-inspector-section > .saas-empty-state {
+  margin: 0;
+}
+
+.ai-app-section-heading {
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.ai-app-section-heading h3 {
+  font-size: var(--font-size-base);
+}
+
+.ai-app-tool-list li {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-block-start: 1px solid var(--color-border-subtle);
+}
+
+.ai-app-tool-list label {
+  display: flex;
+  gap: var(--space-3);
+  min-inline-size: 0;
+}
+
+.ai-app-tool-list input {
+  inline-size: 1rem;
+  block-size: 1rem;
+  accent-color: var(--color-action-primary);
+}
+
+.ai-app-tool-list strong,
+.ai-app-tool-list small {
+  display: block;
+}
+
+.ai-app-tool-list strong {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+}
+
+.ai-app-tool-list small {
+  margin-block-start: var(--space-1);
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-relaxed);
+}
+
+.ai-app-tool-list em {
+  flex: none;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+  font-style: normal;
+}
+
+.ai-app-tool-list em[data-risk='HIGH'],
+.ai-app-tool-list em[data-risk='WRITE'] {
+  color: var(--color-warning);
+}
+
+.ai-app-access-composer {
+  align-items: stretch;
+}
+
+.ai-app-access-composer select {
+  flex: 1 1 8rem;
+}
+
+.ai-app-node-editor {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.ai-app-delivery code {
+  display: block;
+  overflow: auto;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-control);
+  background: var(--color-canvas-subtle);
+  color: var(--color-accent-cyan);
+  font-family: var(--font-code);
+  font-size: var(--font-size-xs);
+  white-space: nowrap;
+}
+
+.ai-app-archive-action {
+  justify-self: start;
+  border-color: color-mix(in oklch, var(--color-danger) 38%, var(--color-border-default));
+  color: var(--color-text-secondary);
+}
+
+.ai-internal-marketplace-intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.ai-internal-marketplace-intro h1,
+.ai-app-runtime-hero h1 {
+  max-inline-size: 48rem;
+  font-size: var(--font-size-3xl);
+}
+
+.ai-internal-marketplace-intro p,
+.ai-app-runtime-hero p {
+  max-inline-size: 42rem;
+  margin: var(--space-3) 0 0;
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+.ai-internal-marketplace-trust {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.ai-internal-marketplace-trust > svg {
+  color: var(--color-accent-cyan);
+}
+
+.ai-internal-marketplace-grid dl {
+  margin-block-start: auto;
+}
+
+.ai-internal-marketplace-grid dt {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.ai-internal-marketplace-back,
+.ai-app-runtime-back {
+  justify-self: start;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.ai-app-runtime-hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+
+.ai-app-runtime-hero > div:last-child {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.ai-app-runtime-hero > div:last-child > svg {
+  color: var(--color-success);
+}
+
+.ai-app-runtime-page > .ai-app-chat {
+  max-inline-size: 56rem;
+}
+
+@media (max-width: 79.9375rem) {
+  .ai-app-builder-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 21rem);
+  }
+
+  .ai-app-builder-palette {
+    position: static;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-block-size: none;
+  }
+
+  .ai-app-builder-palette > .ai-app-panel-heading,
+  .ai-app-builder-palette > .ai-app-field,
+  .ai-app-builder-palette > .ai-app-template-note {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 63.9375rem) {
+  .ai-app-directory-list > li {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .ai-app-directory-list dl,
+  .ai-app-directory-list time {
+    grid-column: 1 / -1;
+  }
+
+  .ai-app-directory-actions {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .ai-app-builder-header,
+  .ai-internal-marketplace-intro,
+  .ai-app-runtime-hero {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ai-app-builder-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-app-builder-inspector {
+    position: static;
+    max-block-size: none;
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  .ai-app-template-directory,
+  .ai-app-directory,
+  .ai-app-preview,
+  .ai-app-chat,
+  .ai-internal-marketplace-intro,
+  .ai-app-runtime-hero {
+    padding: var(--space-4);
+  }
+
+  .ai-app-section-title,
+  .ai-app-workflow-header,
+  .ai-app-builder-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ai-app-section-title > p,
+  .ai-app-workflow-header > p {
+    max-inline-size: none;
+    text-align: start;
+  }
+
+  .ai-app-builder-actions {
+    justify-content: flex-start;
+  }
+
+  .ai-app-builder-actions > button {
+    flex: 1 1 auto;
+  }
+
+  .ai-app-builder-palette {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-app-builder-palette > .ai-app-panel-heading,
+  .ai-app-builder-palette > .ai-app-field,
+  .ai-app-builder-palette > .ai-app-template-note {
+    grid-column: auto;
+  }
+
+  .ai-app-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-app-field-wide {
+    grid-column: auto;
+  }
+
+  .ai-app-react-flow {
+    min-block-size: 18rem;
+  }
+
+  .ai-app-react-flow .react-flow__node-default {
+    min-inline-size: 8rem;
+  }
+
+  .ai-app-directory-list > li {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .ai-app-directory-actions {
+    grid-column: auto;
+    grid-row: auto;
+    justify-content: flex-start;
+  }
+
+  .ai-app-directory-list dl {
+    flex-wrap: wrap;
+  }
+
+  .ai-app-chat form > button {
+    inline-size: 100%;
+  }
+
+  .ai-app-delivery code {
+    white-space: pre;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-app-analytics-metric,
+  .ai-app-template-grid > article,
+  .ai-internal-marketplace-grid > article,
+  .ai-app-block-library > button {
+    transition: none;
+  }
+
+  .ai-app-analytics-metric:hover,
+  .ai-app-template-grid > article:hover,
+  .ai-internal-marketplace-grid > article:hover,
+  .ai-app-block-library > button:hover {
+    transform: none;
+  }
+}

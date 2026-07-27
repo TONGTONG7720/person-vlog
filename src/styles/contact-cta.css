@@ -1,0 +1,126 @@
+.contact-cta {
+  position: relative;
+  overflow: hidden;
+  border-block: 1px solid var(--color-border-subtle);
+  background: var(--color-canvas-subtle);
+}
+
+.contact-cta-container {
+  position: relative;
+  z-index: var(--z-content);
+  display: flex;
+  min-block-size: var(--contact-cta-min-height);
+  align-items: center;
+  padding-block: var(--section-space-lg);
+}
+
+.contact-cta-copy {
+  max-inline-size: var(--contact-cta-copy-measure);
+}
+
+.contact-cta-eyebrow {
+  margin: 0;
+  color: var(--color-accent-cyan);
+  font-family: var(--font-code);
+  font-size: var(--type-caption);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.contact-cta-heading {
+  margin-block: var(--space-5) 0;
+}
+
+.contact-cta-description {
+  max-inline-size: var(--contact-cta-copy-measure);
+  margin-block: var(--space-6) 0;
+}
+
+.contact-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-block-start: var(--space-8);
+}
+
+.contact-cta-brief {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-5);
+  margin: var(--space-8) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-cta-brief li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--type-body-sm);
+  line-height: 1.5;
+}
+
+.contact-cta-brief li:not(:last-child)::after {
+  width: var(--space-6);
+  height: 0.0625rem;
+  margin-left: var(--space-3);
+  background: var(--color-border-strong);
+  content: '';
+}
+
+.contact-cta-brief span {
+  color: var(--color-accent-cyan);
+  font-family: var(--font-code);
+  font-size: var(--type-caption);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.contact-cta-brief strong {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.contact-cta-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 78% 48%,
+      color-mix(in oklch, var(--color-brand-reference) 16%, transparent),
+      transparent 62%
+    ),
+    radial-gradient(
+      circle at 94% 90%,
+      color-mix(in oklch, var(--color-accent-cyan) 8%, transparent),
+      transparent 50%
+    );
+  pointer-events: none;
+}
+
+@media (max-width: 63.9375rem) {
+  .contact-cta-container {
+    min-block-size: auto;
+  }
+}
+
+@media (max-width: 39.9375rem) {
+  .contact-cta-brief {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .contact-cta-brief li:not(:last-child)::after {
+    display: none;
+  }
+
+  .contact-cta-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .contact-cta-actions > a {
+    inline-size: 100%;
+  }
+}

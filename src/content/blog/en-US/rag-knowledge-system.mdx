@@ -1,0 +1,51 @@
+---
+title: 'Building an Enterprise RAG Knowledge System from First Principles'
+slug: 'rag-knowledge-system'
+description: 'A practical breakdown of document processing, retrieval and answer validation for an enterprise RAG knowledge system.'
+category: 'ai'
+tags: ['AI', 'Python', 'RAG', 'LLM']
+publishedAt: '2026-07-18'
+updatedAt: '2026-07-22'
+readingTime: 7
+featured: true
+isPrimary: false
+draft: false
+author: 'Tong'
+locale: 'en-US'
+---
+
+# Building an Enterprise RAG Knowledge System from First Principles
+
+The purpose of an enterprise knowledge assistant is not simply to connect a model and ask it to answer. It is to make answers return to an accountable source. A maintainable RAG system separates ingestion, retrieval, context assembly and human review.
+
+## Make the journey of every document traceable
+
+Each document should retain a source, version, update time and visibility scope. Splitting text by a fixed character count is rarely enough; headings, paragraphs and tables often carry the context that makes retrieval useful.
+
+| Stage      | Input                        | Output                  | Question to resolve                       |
+| ---------- | ---------------------------- | ----------------------- | ----------------------------------------- |
+| Ingestion  | PDFs, documents, web exports | an original-file record | Is the source approved for this audience? |
+| Processing | original files               | structured chunks       | Are headings and tables preserved?        |
+| Retrieval  | a user question              | candidate chunks        | Is the evidence relevant enough?          |
+| Answering  | selected chunks              | a cited answer          | Can the user inspect the source?          |
+
+## Retrieval is not the last decision
+
+Vector similarity gives us candidates, not a guarantee that those candidates should support an answer. A safer flow filters by access and business scope, then tells the model to rely on evidence only. If the evidence is insufficient, the correct result is to say so.
+
+```python
+def answer_question(question: str, tenant_id: str) -> AnswerDraft:
+    chunks = retriever.search(question, filters={"tenant_id": tenant_id}, limit=6)
+    if not chunks:
+        return AnswerDraft(text="The current knowledge base does not contain enough evidence.", sources=[])
+
+    return generator.create_answer(question=question, sources=chunks)
+```
+
+The two priorities are deliberate: apply tenant and permission filters before exposing results, and make the answer carry its sources so a person can validate them.
+
+## Reserve space for review
+
+In business software, RAG works best as an evidence-led discovery layer rather than an unconditional decision-maker. For policies, pricing, compliance or process exceptions, people need to open the source, flag a problem and submit a missing document.
+
+Reliable sources and permission boundaries come before complex agents or automation. That order turns an AI demonstration into a capability a team can verify and operate.

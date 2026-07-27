@@ -1,0 +1,49 @@
+---
+title: 'How to Design a Maintainable Admin System'
+slug: 'maintainable-admin-system'
+description: 'A practical look at module boundaries, permissions and data flow for an admin system that stays understandable as it evolves.'
+category: 'engineering'
+tags: ['Architecture', 'Backend', 'Engineering']
+publishedAt: '2026-07-10'
+updatedAt: '2026-07-15'
+readingTime: 6
+featured: true
+isPrimary: false
+draft: false
+author: 'Tong'
+locale: 'en-US'
+---
+
+# How to Design a Maintainable Admin System
+
+Admin systems grow with roles, workflows and reports. Maintainability does not come from a component library alone. It comes from making every new capability easy to place without quietly breaking an existing business flow.
+
+## Use business boundaries instead of a pile of page files
+
+Start with capabilities such as orders, inventory, members, approvals and content. A module can own its routes, API calls, state and validation, while truly cross-cutting concerns are extracted as shared primitives.
+
+```text
+features/
+  orders/       # order rules and screens
+  inventory/    # inventory rules and screens
+  members/      # members and permission presentation
+shared/         # tables, forms and request utilities
+```
+
+This folder structure is not the point. The point is that a screen is one view of a business capability; it should not become the home for every rule and piece of state.
+
+## Give each state a clear home
+
+Lists, filters, dialogs and details often create near-duplicate versions of the same information. Updating one leaves the others stale, producing problems that look intermittent.
+
+Three categories are useful to align early:
+
+1. **URL state** for pagination, filters and sorting that should survive refresh and sharing.
+2. **Server state** for records and permissions, with explicit cache and invalidation behaviour.
+3. **Local interaction state** for an open dialog, an unfinished field or a short-lived notice.
+
+## Design the exception paths too
+
+An operations interface needs more than a happy path. Lack of access, network failure, empty data, saving conflicts and loading states deserve deliberate feedback. Preserve the user's input on a failed save, say what can happen next, and refresh only the affected region after a successful update.
+
+Clear module boundaries, a single source for each state and visible exception paths make later reporting, richer permissions and automation much easier to add. A maintainable system is not frozen; it is a system that remains understandable when it changes.

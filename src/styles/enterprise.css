@@ -1,0 +1,305 @@
+:root {
+  --enterprise-security-grid-min: 11rem;
+  --enterprise-audit-row-min-height: 4.75rem;
+  --enterprise-risk-panel-min: 12rem;
+  --enterprise-surface-transition: 180ms;
+}
+
+.enterprise-security-page {
+  padding-block-end: var(--space-16);
+}
+
+.enterprise-security-intro {
+  background:
+    linear-gradient(
+      125deg,
+      color-mix(in oklch, var(--color-brand-primary) 13%, transparent),
+      transparent 48%
+    ),
+    var(--color-surface-1);
+}
+
+.enterprise-security-center,
+.enterprise-security-actions {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.enterprise-security-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--enterprise-security-grid-min), 1fr));
+  gap: var(--space-3);
+}
+
+.enterprise-security-metrics article,
+.enterprise-security-audit-panel,
+.enterprise-security-form,
+.enterprise-domain-list article,
+.enterprise-security-review-list {
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-card);
+  background: var(--color-surface-1);
+}
+
+.enterprise-security-metrics article {
+  display: grid;
+  min-block-size: var(--enterprise-risk-panel-min);
+  gap: var(--space-2);
+  padding: var(--space-5);
+  transition:
+    border-color var(--enterprise-surface-transition) var(--ease-out-curve),
+    background var(--enterprise-surface-transition) var(--ease-out-curve);
+}
+
+.enterprise-security-metrics article:hover {
+  border-color: var(--color-border-strong);
+  background: var(--color-surface-hover);
+}
+
+.enterprise-security-metrics svg {
+  color: var(--color-accent-cyan);
+}
+
+.enterprise-security-metrics span,
+.enterprise-security-metrics small,
+.enterprise-audit-list span,
+.enterprise-domain-list small,
+.enterprise-security-review-list small,
+.enterprise-security-form > p {
+  color: var(--color-text-secondary);
+  font-size: var(--text-body-sm-size);
+  line-height: var(--line-height-body);
+}
+
+.enterprise-security-metrics strong {
+  color: var(--color-text-primary);
+  font-size: var(--text-heading-md-size);
+  line-height: 1;
+}
+
+.enterprise-security-audit-panel,
+.enterprise-security-review-list {
+  padding: var(--space-5);
+}
+
+.enterprise-security-audit-panel .saas-panel-heading {
+  align-items: center;
+}
+
+.enterprise-security-export-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.enterprise-audit-list,
+.enterprise-domain-list,
+.enterprise-security-review-list {
+  margin: 0;
+  padding: 0;
+}
+
+.enterprise-audit-list {
+  display: grid;
+  list-style: none;
+}
+
+.enterprise-audit-list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  min-block-size: var(--enterprise-audit-row-min-height);
+  align-items: center;
+  gap: var(--space-3);
+  border-block-start: 1px solid var(--color-border-subtle);
+}
+
+.enterprise-audit-list li:first-child {
+  border-block-start: 0;
+}
+
+.enterprise-audit-list svg {
+  color: var(--color-text-tertiary);
+}
+
+.enterprise-audit-list div,
+.enterprise-domain-list article > div:first-child,
+.enterprise-security-review-list article > div {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.enterprise-audit-list strong,
+.enterprise-domain-list strong,
+.enterprise-security-review-list strong,
+.enterprise-security-form h2 {
+  color: var(--color-text-primary);
+  font-size: var(--text-body-size);
+  font-weight: var(--font-weight-semibold);
+}
+
+.enterprise-audit-list time {
+  color: var(--color-text-tertiary);
+  font-size: var(--type-caption);
+}
+
+.enterprise-security-feedback {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-control);
+  background: var(--color-surface-1);
+  color: var(--color-text-secondary);
+  padding: var(--space-3);
+}
+
+.enterprise-security-feedback[data-state='success'] {
+  border-color: color-mix(in oklch, var(--color-success) 55%, var(--color-border-subtle));
+}
+
+.enterprise-security-feedback[data-state='error'] {
+  border-color: color-mix(in oklch, var(--color-danger) 55%, var(--color-border-subtle));
+}
+
+.enterprise-security-feedback svg {
+  flex: 0 0 auto;
+}
+
+.enterprise-security-feedback[data-state='loading'] svg {
+  animation: enterprise-spin 1s linear infinite;
+}
+
+.enterprise-security-action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.enterprise-security-form {
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+  min-block-size: var(--enterprise-risk-panel-min);
+  padding: var(--space-5);
+}
+
+.enterprise-security-form:last-child {
+  grid-column: 1 / -1;
+}
+
+.enterprise-security-form h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-heading-sm-size);
+}
+
+.enterprise-security-form label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--text-body-sm-size);
+}
+
+.enterprise-security-form label:has(input:not([type='checkbox'])),
+.enterprise-security-form label:has(select) {
+  display: grid;
+  align-items: stretch;
+}
+
+.enterprise-security-form input:not([type='checkbox']),
+.enterprise-security-form select {
+  inline-size: 100%;
+  min-block-size: var(--saas-control-height);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-control);
+  background: var(--color-canvas-subtle);
+  color: var(--color-text-primary);
+  padding-inline: var(--space-3);
+}
+
+.enterprise-security-form input[type='checkbox'] {
+  inline-size: 1rem;
+  block-size: 1rem;
+  accent-color: var(--color-brand-primary);
+}
+
+.enterprise-domain-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: var(--space-3);
+}
+
+.enterprise-domain-list article {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4);
+}
+
+.enterprise-domain-list code {
+  overflow-wrap: anywhere;
+  border-radius: var(--radius-control);
+  background: var(--color-canvas-subtle);
+  color: var(--color-accent-cyan);
+  padding: var(--space-2);
+  font-family: var(--font-code);
+  font-size: var(--type-caption);
+}
+
+.enterprise-domain-list article > div:last-child,
+.enterprise-security-review-list article {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.enterprise-security-review-list h2 {
+  margin: 0 0 var(--space-3);
+  color: var(--color-text-primary);
+  font-size: var(--text-heading-sm-size);
+}
+
+.enterprise-security-review-list article {
+  border-block-start: 1px solid var(--color-border-subtle);
+  padding-block: var(--space-3);
+}
+
+.enterprise-security-review-list article:last-child {
+  padding-block-end: 0;
+}
+
+@keyframes enterprise-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 64rem) {
+  .enterprise-security-action-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .enterprise-security-form:last-child {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 42rem) {
+  .enterprise-security-audit-panel .saas-panel-heading,
+  .enterprise-audit-list li,
+  .enterprise-security-review-list article {
+    align-items: flex-start;
+  }
+
+  .enterprise-audit-list li {
+    grid-template-columns: auto minmax(0, 1fr);
+    padding-block: var(--space-3);
+  }
+
+  .enterprise-audit-list time {
+    grid-column: 2;
+  }
+}

@@ -1,0 +1,100 @@
+@layer components {
+  .article-code-block {
+    overflow: hidden;
+    margin-block: var(--space-7);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-card);
+    background: var(--color-canvas);
+  }
+
+  .article-code-toolbar {
+    display: flex;
+    min-block-size: 2.75rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    border-block-end: 1px solid var(--color-border-subtle);
+    background: var(--color-surface-1);
+    padding-inline: var(--space-4);
+  }
+
+  .article-code-toolbar span {
+    color: var(--color-text-tertiary);
+    font-family: var(--font-code);
+    font-size: var(--type-caption);
+  }
+
+  .article-code-toolbar button {
+    min-block-size: var(--content-code-action-min-height);
+    border: 0;
+    background: transparent;
+    color: var(--color-text-secondary);
+    padding-inline: var(--space-2);
+    font-size: var(--type-caption);
+  }
+
+  .article-code-toolbar button:hover {
+    color: var(--color-text-primary);
+  }
+
+  .article-code-body {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    max-block-size: var(--content-code-max-block-size);
+    overflow: auto;
+  }
+
+  .article-code-lines {
+    margin: 0;
+    border-inline-end: 1px solid var(--color-border-subtle);
+    color: var(--color-text-tertiary);
+    padding: var(--space-4) var(--space-3) var(--space-4) var(--space-7);
+    font-family: var(--font-code);
+    font-size: var(--type-caption);
+    line-height: 1.8;
+    text-align: end;
+  }
+
+  .article-code-body pre {
+    min-inline-size: max-content;
+    margin: 0;
+    background: transparent;
+    color: var(--color-text-secondary);
+    padding: var(--space-4);
+    font-size: var(--type-body-sm);
+    line-height: 1.8;
+  }
+
+  .article-code-body code.hljs {
+    background: transparent;
+    padding: 0;
+  }
+
+  .article-code-body .hljs-keyword,
+  .article-code-body .hljs-selector-tag,
+  .article-code-body .hljs-built_in {
+    color: var(--color-accent-violet);
+  }
+
+  .article-code-body .hljs-string,
+  .article-code-body .hljs-attr,
+  .article-code-body .hljs-title.function_ {
+    color: var(--color-accent-cyan);
+  }
+
+  .article-code-body .hljs-number,
+  .article-code-body .hljs-literal,
+  .article-code-body .hljs-symbol {
+    color: var(--color-warning);
+  }
+
+  .article-code-body .hljs-comment {
+    color: var(--color-text-tertiary);
+  }
+
+  @media (max-width: 47.9375rem) {
+    .article-code-body pre {
+      font-size: 0.8125rem;
+    }
+  }
+}

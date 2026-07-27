@@ -1,0 +1,80 @@
+name: tong-enterprise
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-tong}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env.enterprise}
+      POSTGRES_USER: ${POSTGRES_USER:-tong}
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    command:
+      [
+        'redis-server',
+        '--appendonly',
+        'yes',
+        '--requirepass',
+        '${REDIS_PASSWORD:?set REDIS_PASSWORD in .env.enterprise}',
+      ]
+    healthcheck:
+      test: ['CMD-SHELL', 'redis-cli -a $$REDIS_PASSWORD ping']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+
+  web:
+    build:
+      context: .
+      target: runner
+    env_file:
+      - .env.enterprise
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - '${WEB_PORT:-3000}:3000'
+    restart: unless-stopped
+
+  worker:
+    build:
+      context: .
+      target: worker
+    env_file:
+      - .env.enterprise
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  migrate:
+    build:
+      context: .
+      target: builder
+    command: ['pnpm', 'prisma:deploy']
+    env_file:
+      - .env.enterprise
+    depends_on:
+      postgres:
+        condition: service_healthy
+    profiles: ['migration']
+
+volumes:
+  postgres-data:
+  redis-data:

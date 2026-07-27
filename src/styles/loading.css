@@ -1,0 +1,44 @@
+.loading-page-section {
+  padding-block-start: calc(var(--navigation-height) + var(--section-space-md));
+}
+
+.loading-page-shell {
+  display: grid;
+  max-inline-size: var(--container-text-max);
+  gap: var(--space-6);
+}
+
+.loading-page-label {
+  margin: 0;
+  color: var(--color-accent-cyan);
+  font-family: var(--font-code);
+  font-size: var(--type-caption);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.loading-page-lines {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.loading-page-line {
+  display: block;
+  block-size: var(--space-3);
+  border-radius: var(--radius-control);
+  background: var(--color-surface-raised);
+}
+
+.loading-page-line--title {
+  inline-size: min(100%, 32rem);
+  block-size: var(--space-8);
+  background: var(--color-surface-1);
+}
+
+.loading-page-line--copy {
+  inline-size: min(100%, 26rem);
+}
+
+.loading-page-line--short {
+  inline-size: min(76%, 18rem);
+}

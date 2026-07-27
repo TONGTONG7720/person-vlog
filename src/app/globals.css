@@ -1,0 +1,137 @@
+@import 'tailwindcss';
+@import '@xyflow/react/dist/style.css';
+@import '../styles/tokens.css';
+@import '../styles/typography.css';
+@import '../styles/animations.css';
+@import '../styles/loading.css';
+@import '../styles/hero.css';
+@import '../styles/about.css';
+@import '../styles/skills.css';
+@import '../styles/projects.css';
+@import '../styles/services.css';
+@import '../styles/home-previews.css';
+@import '../styles/process.css';
+@import '../styles/process-visual.css';
+@import '../styles/blog.css';
+@import '../styles/ecosystem.css';
+@import '../styles/ecosystem-content.css';
+@import '../styles/ecosystem-visual.css';
+@import '../styles/contact-cta.css';
+@import '../styles/contact.css';
+@import '../styles/contact-form.css';
+@import '../styles/assistant.css';
+@import '../styles/admin-shell.css';
+@import '../styles/admin-content.css';
+@import '../styles/crm.css';
+@import '../styles/ai-center.css';
+@import '../styles/ai-lead-review.css';
+@import '../styles/analytics.css';
+@import '../styles/prose.css';
+@import '../styles/content-growth.css';
+@import '../styles/content-article.css';
+@import '../styles/content-article-code.css';
+@import '../styles/content-growth-admin.css';
+@import '../styles/saas.css';
+@import '../styles/marketplace.css';
+@import '../styles/enterprise.css';
+@import '../styles/ai-operating-system.css';
+@import '../styles/ai-operating-system-panels.css';
+@import '../styles/ai-native-apps.css';
+@import '../styles/pwa.css';
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--color-canvas);
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--navigation-height);
+  }
+
+  body {
+    min-height: 100dvh;
+    margin: 0;
+    background: var(--color-canvas);
+    color: var(--color-text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-size-adjust: 100%;
+  }
+
+  ::selection {
+    background: color-mix(in oklch, var(--color-brand-reference) 58%, transparent);
+    color: var(--color-text-primary);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-primary);
+    outline-offset: 4px;
+    box-shadow: 0 0 0 2px var(--color-canvas);
+  }
+
+  a {
+    color: inherit;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  img,
+  picture,
+  svg,
+  video {
+    display: block;
+    max-inline-size: 100%;
+  }
+
+  img,
+  video {
+    block-size: auto;
+  }
+
+  section[id] {
+    scroll-margin-top: calc(var(--navigation-height) + var(--space-8));
+  }
+
+  ::-webkit-scrollbar {
+    block-size: 0.75rem;
+    inline-size: 0.75rem;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-strong);
+    border: 0.1875rem solid var(--color-canvas);
+    border-radius: var(--radius-pill);
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-canvas);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

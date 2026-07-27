@@ -1,0 +1,104 @@
+.ai-lead-review-list {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ai-lead-review-list > li {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  border-block-end: 1px solid var(--color-border-subtle);
+  padding-block-end: var(--space-3);
+}
+
+.ai-lead-review-list > li:last-child {
+  border-block-end: 0;
+  padding-block-end: 0;
+}
+
+.ai-lead-review-list strong {
+  color: var(--color-text-primary);
+  font-size: var(--text-body-sm-size);
+  font-weight: var(--font-weight-medium);
+}
+
+.ai-lead-review-list span,
+.ai-lead-review-list p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--text-body-sm-size);
+  line-height: var(--line-height-body);
+}
+
+.ai-lead-review-list > li > div:first-child {
+  display: grid;
+  gap: var(--space-1);
+  min-inline-size: 0;
+}
+
+.ai-lead-review-list p {
+  margin-block-start: var(--space-3);
+  white-space: pre-wrap;
+}
+
+.ai-lead-review-heading,
+.ai-lead-review-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.ai-lead-review-actions {
+  flex: none;
+}
+
+.ai-lead-analysis-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin: var(--space-3) 0 0;
+}
+
+.ai-lead-analysis-facts div {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.ai-lead-analysis-facts dt,
+.ai-lead-analysis-facts dd,
+.ai-lead-question-list {
+  margin: 0;
+}
+
+.ai-lead-analysis-facts dt,
+.ai-lead-question-list {
+  color: var(--color-text-tertiary);
+  font-size: var(--text-label-size);
+}
+
+.ai-lead-analysis-facts dd {
+  color: var(--color-text-primary);
+  font-size: var(--text-body-sm-size);
+}
+
+.ai-lead-question-list {
+  display: grid;
+  gap: var(--space-1);
+  margin-block-start: var(--space-3);
+  padding-inline-start: var(--space-4);
+}
+
+@media (max-width: 47.99rem) {
+  .ai-lead-review-list > li {
+    flex-direction: column;
+  }
+
+  .ai-lead-review-actions {
+    inline-size: 100%;
+  }
+}

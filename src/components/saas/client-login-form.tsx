@@ -5,6 +5,8 @@ import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
+import { isSignInFailure } from '@/lib/auth-result';
+
 export function ClientLoginForm(): React.JSX.Element {
   const router = useRouter();
   const searchParameters = useSearchParams();
@@ -24,7 +26,7 @@ export function ClientLoginForm(): React.JSX.Element {
 
     setIsSubmitting(false);
 
-    if (result?.error !== undefined) {
+    if (isSignInFailure(result)) {
       setErrorMessage('邮箱或密码不正确，或当前账号尚未加入企业空间。');
       return;
     }

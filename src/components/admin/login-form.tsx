@@ -4,6 +4,8 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
+import { isSignInFailure } from '@/lib/auth-result';
+
 export function AdminLoginForm(): React.JSX.Element {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
@@ -21,7 +23,7 @@ export function AdminLoginForm(): React.JSX.Element {
 
     setIsSubmitting(false);
 
-    if (result?.error !== undefined) {
+    if (isSignInFailure(result)) {
       setErrorMessage('邮箱、密码或后台配置不正确。');
 
       return;
